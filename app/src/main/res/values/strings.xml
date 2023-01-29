@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ParaniKontrolEt</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_detail">Detail</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="name">name</string>
+    <string name="verify_password">Verify Password</string>
+    <string name="sign_up">sign up</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_out">sign out</string>
+    <string name="have_an_account">Have an Account?</string>
+</resources>
