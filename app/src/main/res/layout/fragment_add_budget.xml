@@ -3,18 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/back_ground_500"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.add_budget.AddBudgetFragment">
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/income_expense_budget"
         android:textSize="25sp"
         android:textStyle="italic"
-        android:textColor="#03A9F4"
+        android:textAlignment="center"
+        android:background="@color/back_ground_300"
+        android:textColor="@color/back_ground_100"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,9 +32,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@color/white"
+        android:padding="12dp"
+        android:background="@color/back_ground_300"
         app:singleLine="false"
         app:singleSelection="true">
 
@@ -40,7 +42,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipIncome"
             android:text="@string/income"
-            app:chipStrokeColor="@color/red_100"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -52,6 +54,7 @@
             app:chipIconVisible="true"
             android:id="@+id/chipRent"
             android:text="@string/rent"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -62,6 +65,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipInvoices"
             android:text="@string/invoices"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -72,6 +76,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipFuel"
             android:text="@string/fuel"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -82,6 +87,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipAnother"
             android:text="@string/another"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -92,6 +98,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipBill"
             android:text="@string/bill"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -102,6 +109,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipPhone"
             android:text="@string/phone"
+            app:chipBackgroundColor="@color/back_ground_100"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -119,6 +127,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginLeft="24dp"
         android:inputType="number"
+        android:background="@color/back_ground_300"
         android:layout_marginRight="24dp"
         android:hint="@string/amount">
     </androidx.appcompat.widget.AppCompatEditText>
@@ -149,6 +158,14 @@
         app:layout_constraintRight_toRightOf="@id/editTextAmount">
     </com.google.android.material.switchmaterial.SwitchMaterial>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextAmount">
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchRegular"
@@ -156,9 +173,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:checked="true"
-        android:text="Regular"
+        android:text="@string/regular_payment"
         android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@id/switchIncome"
+        app:layout_constraintLeft_toLeftOf="@id/editTextAmount"
         app:layout_constraintTop_toBottomOf="@id/switchIncome">
     </com.google.android.material.switchmaterial.SwitchMaterial>
 
@@ -169,7 +186,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:checked="false"
-        android:text="Regular"
+        android:text="@string/irregular_payment"
         android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@id/switchRegular"
         app:layout_constraintTop_toBottomOf="@id/switchIncome">
