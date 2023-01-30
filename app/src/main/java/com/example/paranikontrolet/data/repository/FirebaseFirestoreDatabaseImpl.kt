@@ -24,8 +24,25 @@ private val firestore: FirebaseFirestore
             Constants.NICKNAME to name,
             Constants.PASSWORD to password
         )
-        firestore.collection(Constants.COLLECTION_PATH)
+        firestore.collection(Constants.COLLECTION_PATH_USER)
             .document(getFirebaseUserUid)
             .set(user).await()
+    }
+
+    override suspend fun saveBudget(
+        amount: Float,
+        isIncome: Boolean,
+        isRegular: Boolean,
+        type: String
+    ) {
+        val budget = hashMapOf<String,Any>(
+            Constants.AMOUNT to amount,
+            Constants.IS_INCOME to isIncome,
+            Constants.IS_REGULAR to isRegular,
+            Constants.TYPE to type,
+            Constants.DATE to "daha sonra yapılacak"
+        )
+        firestore.collection(Constants.COLLECTION_PATH_BUDGET)
+            .add(budget).await()
     }
 }

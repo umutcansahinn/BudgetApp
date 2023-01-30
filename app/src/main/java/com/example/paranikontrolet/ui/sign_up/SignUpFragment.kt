@@ -63,13 +63,13 @@ class SignUpFragment : BaseFragment() {
             when(it) {
                 is Resource.Success -> {
                     binding.progressBar.gone()
-                    findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
                     viewModel.saveUser(
                         getFirebaseUserUid = it.data?.user?.uid!!,
                         email = binding.editTextEmail.text.toString(),
                         name = binding.editTextName.text.toString(),
                         password = binding.editTextPassword.text.toString()
                     )
+                    findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
                 }
                 is Resource.Error -> {
                     binding.progressBar.gone()

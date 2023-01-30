@@ -16,4 +16,16 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_out">sign out</string>
     <string name="have_an_account">Have an Account?</string>
+    <string name="content_description">fab</string>
+    <string name="income_expense_budget">Income-Expense Budget</string>
+    <string name="amount">Amount</string>
+    <string name="income">income</string>
+    <string name="expense">expense</string>
+    <string name="house_rent">house rent</string>
+    <string name="invoices">invoices</string>
+    <string name="rent">rent</string>
+    <string name="fuel">fuel</string>
+    <string name="another">another</string>
+    <string name="bill">bill</string>
+    <string name="phone">phone</string>
 </resources>

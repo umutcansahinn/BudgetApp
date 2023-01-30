@@ -8,4 +8,11 @@ interface FirebaseFirestoreDatabase {
         name: String,
         password: String
     )
+
+    suspend fun saveBudget(
+        amount: Float,
+        isIncome: Boolean,
+        isRegular: Boolean,
+        type: String
+    )
 }

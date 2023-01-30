@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentHomeBinding
 import com.example.paranikontrolet.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,12 +29,22 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textHome.setOnClickListener {
-            Navigation.findNavController(it)
-                .navigate(HomeFragmentDirections.actionNavigationHomeToDetailFragment())
-        }
+        observeEvent()
+        initViews()
+
+    }
+
+    private fun observeEvent() {
+
+    }
+
+    private fun initViews() {
         bottomNavigationViewVisibility = View.VISIBLE
         toolbarVisibility = true
+
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_addCashFlowFragment)
+        }
     }
 
     override fun onDestroyView() {

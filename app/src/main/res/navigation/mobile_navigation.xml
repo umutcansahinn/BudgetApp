@@ -11,8 +11,8 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_detailFragment"
-            app:destination="@id/navigation_detail" />
+            android:id="@+id/action_navigation_home_to_addCashFlowFragment"
+            app:destination="@id/addCashFlowFragment" />
     </fragment>
 
     <fragment
@@ -30,11 +30,6 @@
         android:name="com.example.paranikontrolet.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/navigation_detail"
-        android:name="com.example.paranikontrolet.ui.home.DetailFragment"
-        android:label="@string/title_detail"
-        tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.paranikontrolet.ui.splash.SplashFragment"
@@ -71,4 +66,9 @@
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addCashFlowFragment"
+        android:name="com.example.paranikontrolet.ui.add_budget.AddBudgetFragment"
+        android:label="fragment_add_cash_flow"
+        tools:layout="@layout/fragment_add_budget" />
 </navigation>
