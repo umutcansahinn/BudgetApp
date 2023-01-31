@@ -30,4 +30,5 @@
     <string name="phone">phone</string>
     <string name="regular_payment">regular payment</string>
     <string name="irregular_payment">irregular payment</string>
+    <string name="error">Error</string>
 </resources>

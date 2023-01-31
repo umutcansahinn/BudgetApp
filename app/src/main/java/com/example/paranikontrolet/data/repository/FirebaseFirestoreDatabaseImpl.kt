@@ -2,13 +2,14 @@ package com.example.paranikontrolet.data.repository
 
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.utils.Constants
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirebaseFirestoreDatabaseImpl @Inject constructor(
-private val firestore: FirebaseFirestore
-) : FirebaseFirestoreDatabase{
+    private val firestore: FirebaseFirestore
+) : FirebaseFirestoreDatabase {
 
 
     override suspend fun saveUser(
@@ -18,7 +19,7 @@ private val firestore: FirebaseFirestore
         password: String
     ) {
 
-        val user = hashMapOf<String,Any>(
+        val user = hashMapOf<String, Any>(
             Constants.ID to getFirebaseUserUid,
             Constants.E_MAIL to email,
             Constants.NICKNAME to name,
@@ -35,7 +36,7 @@ private val firestore: FirebaseFirestore
         isRegular: Boolean,
         type: String
     ) {
-        val budget = hashMapOf<String,Any>(
+        val budget = hashMapOf<String, Any>(
             Constants.AMOUNT to amount,
             Constants.IS_INCOME to isIncome,
             Constants.IS_REGULAR to isRegular,
@@ -44,5 +45,9 @@ private val firestore: FirebaseFirestore
         )
         firestore.collection(Constants.COLLECTION_PATH_BUDGET)
             .add(budget).await()
+    }
+
+    override suspend fun getBudgetDocuments(): Task<QuerySnapshot> {
+            return firestore.collection(Constants.COLLECTION_PATH_BUDGET).get()
     }
 }
