@@ -2,7 +2,6 @@ package com.example.paranikontrolet.data.repository
 
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.utils.Constants
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -46,8 +45,7 @@ class FirebaseFirestoreDatabaseImpl @Inject constructor(
         firestore.collection(Constants.COLLECTION_PATH_BUDGET)
             .add(budget).await()
     }
-
-    override suspend fun getBudgetDocuments(): Task<QuerySnapshot> {
-            return firestore.collection(Constants.COLLECTION_PATH_BUDGET).get()
+    override suspend fun getBudgetDocuments(): QuerySnapshot {
+            return firestore.collection(Constants.COLLECTION_PATH_BUDGET).get().await()
     }
 }

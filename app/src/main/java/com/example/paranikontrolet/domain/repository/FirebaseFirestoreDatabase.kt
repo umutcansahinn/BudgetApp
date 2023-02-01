@@ -1,6 +1,5 @@
 package com.example.paranikontrolet.domain.repository
 
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
 
 interface FirebaseFirestoreDatabase {
@@ -18,7 +17,6 @@ interface FirebaseFirestoreDatabase {
         isRegular: Boolean,
         type: String
     )
-
-    suspend fun getBudgetDocuments(): Task<QuerySnapshot>
+    suspend fun getBudgetDocuments(): QuerySnapshot
 
 }
