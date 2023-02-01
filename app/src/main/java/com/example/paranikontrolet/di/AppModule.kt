@@ -48,6 +48,8 @@ object AppModule {
         return FirebaseFirestoreDatabaseImpl(firestore)
     }
 
+    @Provides
+    @Singleton
     fun provideFirebaseAuthUseCases(auth: FirebaseAuthenticator): FirebaseAuthUseCases {
         return FirebaseAuthUseCases(
             getCurrentUserUseCase = GetCurrentUserUseCase(auth = auth),
@@ -57,6 +59,8 @@ object AppModule {
         )
     }
 
+    @Provides
+    @Singleton
     fun provideFirebaseFirestoreUseCases(
         firestore: FirebaseFirestoreDatabase): FirebaseFirestoreUseCases {
 
