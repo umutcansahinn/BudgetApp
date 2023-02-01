@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.paranikontrolet.domain.usecase.SignUpUseCase
-import com.example.paranikontrolet.domain.usecase.firestore_database.SaveUserUseCase
+import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
+import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
+import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.SignUpUseCase
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUserUseCase
 import com.example.paranikontrolet.utils.Resource
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val signUpUseCase: SignUpUseCase,
-    private val saveUserUseCase: SaveUserUseCase
+    private val firebaseAuthUseCases: FirebaseAuthUseCases,
+    private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases
 ) : ViewModel() {
 
 
@@ -29,7 +31,7 @@ class SignUpViewModel @Inject constructor(
         verifyPassword: String?
     ) {
         viewModelScope.launch() {
-            val result = signUpUseCase(
+            val result = firebaseAuthUseCases.signUpUseCase(
                 email = email,
                 name = name,
                 password = password,
@@ -46,7 +48,7 @@ class SignUpViewModel @Inject constructor(
         password: String
     ) {
         viewModelScope.launch {
-            saveUserUseCase(
+            firebaseFirestoreUseCases.saveUserUseCase(
                 getFirebaseUserUid = getFirebaseUserUid,
                 email = email,
                 name = name,

@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.domain.usecase
+package com.example.paranikontrolet.domain.usecase.firebase_auth_usecase
 
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import javax.inject.Inject

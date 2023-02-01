@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.domain.usecase.firestore_database
+package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
 
 import android.util.Log
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
