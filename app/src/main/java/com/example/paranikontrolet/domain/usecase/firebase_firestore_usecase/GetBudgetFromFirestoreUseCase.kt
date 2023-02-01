@@ -10,10 +10,10 @@ import javax.inject.Inject
 class GetBudgetFromFirestoreUseCase @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
 ) {
-    suspend operator fun invoke(): Resource<List<Budget>> {
+    suspend operator fun invoke(userId: String): Resource<List<Budget>> {
         return try {
             Resource.Loading(data = null)
-            val result = firestore.getBudgetDocuments()
+            val result = firestore.getBudgetDocuments(userId = userId)
             val budgetList = ArrayList<Budget>()
             budgetList.clear()
             result.forEach {

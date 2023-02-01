@@ -31,4 +31,7 @@
     <string name="regular_payment">regular payment</string>
     <string name="irregular_payment">irregular payment</string>
     <string name="error">Error</string>
+    <string name="calender">calender</string>
+    <string name="save">save</string>
+    <string name="select_date_button">Select Date</string>
 </resources>

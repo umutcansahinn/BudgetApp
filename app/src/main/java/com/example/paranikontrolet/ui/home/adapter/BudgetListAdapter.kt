@@ -1,10 +1,13 @@
 package com.example.paranikontrolet.ui.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
+import com.example.paranikontrolet.utils.Constants
+import com.example.paranikontrolet.utils.toFormat
 
 class BudgetListAdapter: RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
 
@@ -28,7 +31,8 @@ class BudgetListAdapter: RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textViewAmount.text = budgetList[position].amount.toString()
         holder.binding.textViewType.text = budgetList[position].type
-
+        holder.binding.textViewDate.text =
+            budgetList[position].date.toString()
     }
 
     fun updateList(newToDoList: List<Budget>) {

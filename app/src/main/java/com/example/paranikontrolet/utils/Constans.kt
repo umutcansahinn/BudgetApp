@@ -15,4 +15,8 @@ object Constants {
     const val IS_REGULAR = "isRegular"
     const val TYPE = "type"
     const val DATE = "date"
+    const val USER_ID = "userId"
+
+    const val CURRENT_DATE_FORMAT = "dd MMM yyyy"
+    const val TAG_DATE_PICKER = "Tag_Date_Picker"
 }

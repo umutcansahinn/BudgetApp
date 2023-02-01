@@ -6,10 +6,7 @@ import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
 import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
-import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.GetCurrentUserUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.SignInUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.SignOutUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.SignUpUseCase
+import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.*
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestoreUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudgetUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUserUseCase
@@ -55,7 +52,8 @@ object AppModule {
             getCurrentUserUseCase = GetCurrentUserUseCase(auth = auth),
             signInUseCase = SignInUseCase(auth = auth),
             signOutUseCase = SignOutUseCase(auth = auth),
-            signUpUseCase = SignUpUseCase(auth = auth)
+            signUpUseCase = SignUpUseCase(auth = auth),
+            getCurrentUserInfoUseCase = GetCurrentUserInfoUseCase(auth = auth)
         )
     }
 

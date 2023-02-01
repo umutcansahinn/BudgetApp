@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.paranikontrolet.data.model.Budget
+import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
 import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
 import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases
+private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases,
+private val firebaseAuthUseCases: FirebaseAuthUseCases
 ) : ViewModel() {
 
     private val _result = MutableLiveData<Resource<List<Budget>>?>()
@@ -22,7 +24,8 @@ private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases
 
     fun getBudgetFromFirestore() {
         viewModelScope.launch {
-            _result.value = firebaseFirestoreUseCases.getBudgetFromFirestoreUseCase()
+            val userId = firebaseAuthUseCases.getCurrentUserInfoUseCase()
+            _result.value = firebaseFirestoreUseCases.getBudgetFromFirestoreUseCase(userId!!.uid)
         }
     }
 }

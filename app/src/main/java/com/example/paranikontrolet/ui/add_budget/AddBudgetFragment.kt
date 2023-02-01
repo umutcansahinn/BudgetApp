@@ -1,5 +1,6 @@
 package com.example.paranikontrolet.ui.add_budget
 
+import android.os.BugreportManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
+import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.FragmentAddBudgetBinding
 import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.utils.Constants
+import com.example.paranikontrolet.utils.toFormat
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class AddBudgetFragment : BaseFragment() {
@@ -24,6 +30,8 @@ class AddBudgetFragment : BaseFragment() {
     var isRegular: Boolean? = null
     var type: String? = null
     //data ekle
+
+    private var selectedDate = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,11 +75,14 @@ class AddBudgetFragment : BaseFragment() {
             isIncome = binding.switchIncome.isChecked
             isRegular = binding.switchRegular.isChecked
 
+
+
             viewModel.addBudget(
                 amount = amount,
                 isIncome = isIncome,
                 isRegular = isRegular,
-                type = type
+                type = type,
+                date = selectedDate
             )
             findNavController().popBackStack()
         }
@@ -88,6 +99,30 @@ class AddBudgetFragment : BaseFragment() {
         }
         binding.switchNotRegular.setOnClickListener {
             binding.switchRegular.isChecked = !binding.switchRegular.isChecked
+        }
+
+        binding.buttonCalender.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText(getString(R.string.select_date_button))
+                    .setSelection(selectedDate.time)
+                    .build()
+            datePicker.addOnPositiveButtonClickListener { timestamp ->
+                val selectedUtc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                selectedUtc.timeInMillis = timestamp
+                val selectedLocal = Calendar.getInstance()
+                selectedLocal.clear()
+                selectedLocal.set(
+                    selectedUtc.get(Calendar.YEAR),
+                    selectedUtc.get(Calendar.MONTH),
+                    selectedUtc.get(Calendar.DATE)
+                )
+
+                selectedDate = selectedLocal.time
+                binding.buttonCalender.text =
+                    selectedLocal.time.toFormat(Constants.CURRENT_DATE_FORMAT)
+            }
+            datePicker.show(parentFragmentManager, Constants.TAG_DATE_PICKER)
         }
 
         bottomNavigationViewVisibility = View.VISIBLE

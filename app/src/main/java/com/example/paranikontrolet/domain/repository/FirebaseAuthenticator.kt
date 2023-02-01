@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.domain.repository
 
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseUser
 
 interface FirebaseAuthenticator {
 
@@ -17,4 +18,6 @@ interface FirebaseAuthenticator {
     suspend fun signOut()
 
     suspend fun getCurrentUser(): Boolean
+
+    suspend fun getCurrentUserInfo(): FirebaseUser?
 }

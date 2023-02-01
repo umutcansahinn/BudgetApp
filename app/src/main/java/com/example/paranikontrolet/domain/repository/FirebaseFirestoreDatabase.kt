@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.domain.repository
 
 import com.google.firebase.firestore.QuerySnapshot
+import java.util.Date
 
 interface FirebaseFirestoreDatabase {
 
@@ -15,8 +16,10 @@ interface FirebaseFirestoreDatabase {
         amount: Float,
         isIncome: Boolean,
         isRegular: Boolean,
-        type: String
+        type: String,
+        date: Date,
+        currentUserId: String
     )
-    suspend fun getBudgetDocuments(): QuerySnapshot
+    suspend fun getBudgetDocuments(userId: String): QuerySnapshot
 
 }
