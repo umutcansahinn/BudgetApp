@@ -4,62 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B39DDB"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.sign_up.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:id="@+id/editTextEmail"
         android:hint="@string/email"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:padding="10dp"
+        android:background="@drawable/grey_background"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.appcompat.widget.AppCompatEditText>
-
 
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:id="@+id/editTextName"
         android:hint="@string/name"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:padding="10dp"
+        android:background="@drawable/grey_background"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.appcompat.widget.AppCompatEditText>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:id="@+id/editTextPassword"
         android:hint="@string/password"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:inputType="textPassword"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:padding="10dp"
+        android:inputType="numberPassword"
+        android:background="@drawable/grey_background"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextName">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.appcompat.widget.AppCompatEditText>
+
 
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:id="@+id/editTextVerifyPassword"
         android:hint="@string/verify_password"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:padding="10dp"
         android:inputType="textPassword"
+        android:background="@drawable/grey_background"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.appcompat.widget.AppCompatEditText>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -67,11 +76,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonSignUp"
         android:text="@string/sign_up"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/purple_background"
         app:layout_constraintTop_toBottomOf="@+id/editTextVerifyPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
         android:layout_marginTop="30dp">
     </androidx.appcompat.widget.AppCompatButton>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +93,7 @@
         android:text="@string/have_an_account"
         app:layout_constraintRight_toLeftOf="@+id/textViewSignIn"
         app:layout_constraintTop_toBottomOf="@id/buttonSignUp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp">
     </TextView>
 
@@ -93,12 +106,11 @@
         app:layout_constraintLeft_toRightOf="@id/textViewSignUpQuestion"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
         app:layout_constraintEnd_toEndOf="@+id/buttonSignUp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="4dp"
         android:textStyle="bold"
         android:textSize="16sp">
     </TextView>
-
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -110,8 +122,5 @@
         android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent">
     </ProgressBar>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

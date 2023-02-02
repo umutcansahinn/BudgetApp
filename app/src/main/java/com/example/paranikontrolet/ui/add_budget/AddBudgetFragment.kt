@@ -2,6 +2,7 @@ package com.example.paranikontrolet.ui.add_budget
 
 import android.os.BugreportManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +26,11 @@ class AddBudgetFragment : BaseFragment() {
 
     private val viewModel: AddBudgetViewModel by viewModels()
 
-    var amount: Float? = null
-    var isIncome: Boolean? = null
-    var isRegular: Boolean? = null
-    var type: String? = null
-    //data ekle
-
-    private var selectedDate = Date()
+    private var amount: Float? = null
+    private var isIncome: Boolean? = null
+    private var isRegular: Boolean? = null
+    private var type: String? = null
+    private var selectedDate: Date? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,25 +68,6 @@ class AddBudgetFragment : BaseFragment() {
             }
         }
 
-        binding.buttonSave.setOnClickListener {
-
-            amount = binding.editTextAmount.text.toString().toFloatOrNull()
-            isIncome = binding.switchIncome.isChecked
-            isRegular = binding.switchRegular.isChecked
-
-
-
-            viewModel.addBudget(
-                amount = amount,
-                isIncome = isIncome,
-                isRegular = isRegular,
-                type = type,
-                date = selectedDate
-            )
-            findNavController().popBackStack()
-        }
-
-
         binding.switchIncome.setOnClickListener {
             binding.switchExpense.isChecked = !binding.switchExpense.isChecked
         }
@@ -105,7 +85,7 @@ class AddBudgetFragment : BaseFragment() {
             val datePicker =
                 MaterialDatePicker.Builder.datePicker()
                     .setTitleText(getString(R.string.select_date_button))
-                    .setSelection(selectedDate.time)
+                    .setSelection(selectedDate?.time)
                     .build()
             datePicker.addOnPositiveButtonClickListener { timestamp ->
                 val selectedUtc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
@@ -117,15 +97,34 @@ class AddBudgetFragment : BaseFragment() {
                     selectedUtc.get(Calendar.MONTH),
                     selectedUtc.get(Calendar.DATE)
                 )
-
+                Log.d("time_time", selectedLocal.time.toString())
                 selectedDate = selectedLocal.time
+                Log.d("time_time_2", selectedDate.toString())
                 binding.buttonCalender.text =
                     selectedLocal.time.toFormat(Constants.CURRENT_DATE_FORMAT)
             }
             datePicker.show(parentFragmentManager, Constants.TAG_DATE_PICKER)
         }
 
-        bottomNavigationViewVisibility = View.VISIBLE
+
+        binding.buttonSave.setOnClickListener {
+
+            amount = binding.editTextAmount.text.toString().toFloatOrNull()
+            isIncome = binding.switchIncome.isChecked
+            isRegular = binding.switchRegular.isChecked
+
+            viewModel.addBudget(
+                amount = amount,
+                isIncome = isIncome,
+                isRegular = isRegular,
+                type = type,
+                date = selectedDate
+            )
+            findNavController().popBackStack()
+        }
+
+
+        bottomNavigationViewVisibility = View.GONE
         toolbarVisibility = true
     }
 

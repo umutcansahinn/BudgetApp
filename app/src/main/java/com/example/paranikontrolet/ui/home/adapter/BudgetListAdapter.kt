@@ -1,6 +1,5 @@
 package com.example.paranikontrolet.ui.home.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +31,7 @@ class BudgetListAdapter: RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         holder.binding.textViewAmount.text = budgetList[position].amount.toString()
         holder.binding.textViewType.text = budgetList[position].type
         holder.binding.textViewDate.text =
-            budgetList[position].date.toString()
+            budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
     }
 
     fun updateList(newToDoList: List<Budget>) {

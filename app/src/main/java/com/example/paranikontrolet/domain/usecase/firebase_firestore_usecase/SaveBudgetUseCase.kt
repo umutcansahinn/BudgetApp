@@ -18,11 +18,7 @@ class SaveBudgetUseCase @Inject constructor(
         date: Date?,
         currentUserId: String?
     ) {
-        Log.d("result", "inUseCase")
-        Log.d(
-            "result",
-            "amount: ${amount} , isIncome: ${isIncome} , isRegular: ${isRegular} , type: ${type}"
-        )
+
         if (
             amount != null &&
             isIncome != null &&

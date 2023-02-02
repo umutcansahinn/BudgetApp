@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/back_ground_500"
+    android:background="#B39DDB"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.add_budget.AddBudgetFragment">
@@ -16,8 +16,7 @@
         android:textSize="25sp"
         android:textStyle="italic"
         android:textAlignment="center"
-        android:background="@color/back_ground_300"
-        android:textColor="@color/back_ground_100"
+        android:textColor="#ffffff"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,8 +31,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="24dp"
-        android:padding="12dp"
-        android:background="@color/back_ground_300"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/grey_background"
         app:singleLine="false"
         app:singleSelection="true">
 
@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipIncome"
             android:text="@string/income"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -54,7 +55,8 @@
             app:chipIconVisible="true"
             android:id="@+id/chipRent"
             android:text="@string/rent"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -65,7 +67,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipInvoices"
             android:text="@string/invoices"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -76,7 +79,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipFuel"
             android:text="@string/fuel"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -87,7 +91,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipAnother"
             android:text="@string/another"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -98,7 +103,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipBill"
             android:text="@string/bill"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
@@ -109,111 +115,145 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipPhone"
             android:text="@string/phone"
-            app:chipBackgroundColor="@color/back_ground_100"
+            app:chipBackgroundColor="#B39DDB"
+            android:textColor="#FFFFFF"
             app:chipIcon="@drawable/baseline_alternate_email_24"
+
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
 
     </com.google.android.material.chip.ChipGroup>
 
-<androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextAmount"
+    <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/editTextAmount"
+        android:hint="@string/amount"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:padding="10dp"
+        android:inputType="number"
+        android:background="@drawable/grey_background"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="24dp"
-        android:inputType="number"
-        android:background="@color/back_ground_300"
-        android:layout_marginRight="24dp"
-        android:hint="@string/amount">
+        app:layout_constraintRight_toRightOf="parent">
     </androidx.appcompat.widget.AppCompatEditText>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchIncome"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/income"
-        android:textSize="18sp"
-        android:checked="true"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextAmount"
-        app:layout_constraintLeft_toLeftOf="@id/editTextAmount"
-        app:layout_constraintRight_toLeftOf="@id/switchExpense">
-    </com.google.android.material.switchmaterial.SwitchMaterial>
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchExpense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/expense"
-        android:textSize="18sp"
-        android:checked="false"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextAmount"
-        app:layout_constraintLeft_toRightOf="@id/switchIncome"
-        app:layout_constraintRight_toRightOf="@id/editTextAmount">
-    </com.google.android.material.switchmaterial.SwitchMaterial>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#e3e3e3"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAmount">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/income"
+                android:textSize="18sp"
+                android:checked="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            </com.google.android.material.switchmaterial.SwitchMaterial>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expense"
+                android:textSize="18sp"
+                android:checked="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchIncome">
+            </com.google.android.material.switchmaterial.SwitchMaterial>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="#e3e3e3"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextAmount">
+        app:layout_constraintTop_toBottomOf="@+id/editTextAmount">
 
-    </com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:checked="true"
-        android:text="@string/regular_payment"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@id/editTextAmount"
-        app:layout_constraintTop_toBottomOf="@id/switchIncome">
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/regular_payment"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            </com.google.android.material.switchmaterial.SwitchMaterial>
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchNotRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:checked="false"
-        android:text="@string/irregular_payment"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toRightOf="@id/switchRegular"
-        app:layout_constraintTop_toBottomOf="@id/switchIncome">
-    </com.google.android.material.switchmaterial.SwitchMaterial>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchNotRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/irregular_payment"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/switchRegular"
+                app:layout_constraintLeft_toLeftOf="parent">
+            </com.google.android.material.switchmaterial.SwitchMaterial>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonCalender"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/buttonCalender"
         android:text="@string/calender"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/purple_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchRegular"
-        android:layout_marginTop="24dp">
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        android:layout_marginTop="12dp">
     </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSave"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:id="@+id/buttonSave"
         android:text="@string/save"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCalender"
-        android:layout_marginBottom="4dp">
+        android:background="@drawable/purple_background"
+        android:layout_marginTop="16dp">
     </androidx.appcompat.widget.AppCompatButton>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

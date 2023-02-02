@@ -15,7 +15,7 @@ private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases,
 private val firebaseAuthUseCases: FirebaseAuthUseCases
 ): ViewModel() {
 
-    fun addBudget(amount: Float?,isIncome: Boolean?,isRegular: Boolean?,type: String?,date: Date) {
+    fun addBudget(amount: Float?,isIncome: Boolean?,isRegular: Boolean?,type: String?,date: Date?) {
         viewModelScope.launch {
             val currentUser = firebaseAuthUseCases.getCurrentUserInfoUseCase()
             firebaseFirestoreUseCases.saveBudgetUseCase(
