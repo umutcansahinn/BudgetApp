@@ -19,7 +19,8 @@ class BudgetMapper {
         type = getType(),
         date = getDate(),
         icon = getIcon(),
-        textColor = getTextColor()
+        textColor = getTextColor(),
+        strokeColor = getStrokeColor()
     )
 
     private fun Budget.getAmount() = amount
@@ -45,5 +46,10 @@ class BudgetMapper {
     private fun Budget.getTextColor() = when(isIncome) {
         true-> Color.GREEN
         else-> Color.RED
+    }
+
+    private fun Budget.getStrokeColor() = when(isIncome) {
+        true -> Color.GREEN
+        else -> Color.RED
     }
 }

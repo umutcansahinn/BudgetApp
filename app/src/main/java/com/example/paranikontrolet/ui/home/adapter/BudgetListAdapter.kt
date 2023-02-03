@@ -43,13 +43,8 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
             budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
         holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
         holder.binding.textViewAmount.setTextColor(budgetList[position].textColor)
-        if (budgetList[position].isIncome) {
-            holder.binding.cardView.setStrokeColor(Color.GREEN)
+        holder.binding.cardView.setStrokeColor(budgetList[position].strokeColor)
 
-        } else {
-            holder.binding.cardView.setStrokeColor(Color.RED)
-
-        }
     }
 
     fun updateList(newToDoList: List<BudgetUiModel>) {
