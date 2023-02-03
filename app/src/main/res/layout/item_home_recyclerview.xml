@@ -41,8 +41,9 @@
                 android:layout_height="wrap_content"
                 android:text="250"
                 android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewType"
-                app:layout_constraintLeft_toLeftOf="parent">
+                app:layout_constraintLeft_toRightOf="@+id/imageViewIcon">
             </TextView>
 
             <TextView
@@ -54,6 +55,15 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
             </TextView>
+
+            <ImageView
+                android:id="@+id/imageViewIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/education_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewType">
+            </ImageView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
