@@ -42,12 +42,13 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         holder.binding.textViewDate.text =
             budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
         holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
+        holder.binding.textViewAmount.setTextColor(budgetList[position].textColor)
         if (budgetList[position].isIncome) {
             holder.binding.cardView.setStrokeColor(Color.GREEN)
-            holder.binding.textViewAmount.setTextColor(Color.GREEN)
+
         } else {
             holder.binding.cardView.setStrokeColor(Color.RED)
-            holder.binding.textViewAmount.setTextColor(Color.RED)
+
         }
     }
 

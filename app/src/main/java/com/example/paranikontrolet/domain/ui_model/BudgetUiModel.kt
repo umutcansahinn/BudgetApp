@@ -8,6 +8,7 @@ data class BudgetUiModel(
     val isRegular: Boolean,
     val type: String,
     val date: Date,
-    val icon: Int
+    val icon: Int,
+    val textColor: Int
 
 )

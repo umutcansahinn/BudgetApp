@@ -1,5 +1,6 @@
 package com.example.paranikontrolet.domain.mapper
 
+import android.graphics.Color
 import androidx.annotation.StringRes
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.data.model.Budget
@@ -17,7 +18,8 @@ class BudgetMapper {
         isRegular = getIsRegular(),
         type = getType(),
         date = getDate(),
-        icon = getIcon()
+        icon = getIcon(),
+        textColor = getTextColor()
     )
 
     private fun Budget.getAmount() = amount
@@ -37,7 +39,11 @@ class BudgetMapper {
         "market" -> R.drawable.market_icon
         "clothes" -> R.drawable.clothes_icon
         "education" -> R.drawable.education_icon
-        "others" -> R.drawable.others_icon
         else -> R.drawable.others_icon
+    }
+
+    private fun Budget.getTextColor() = when(isIncome) {
+        true-> Color.GREEN
+        else-> Color.RED
     }
 }
