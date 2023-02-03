@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/income_expense_budget"
-        android:textSize="25sp"
+        android:textSize="35sp"
         android:textStyle="italic"
         android:textAlignment="center"
         android:textColor="#ffffff"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
@@ -30,9 +30,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
+        android:padding="8dp"
         android:background="@drawable/grey_background"
         app:singleLine="false"
         app:singleSelection="true">
@@ -42,9 +43,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipIncome"
             android:text="@string/income"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/income_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -55,9 +55,8 @@
             app:chipIconVisible="true"
             android:id="@+id/chipRent"
             android:text="@string/rent"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/home_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -65,11 +64,10 @@
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chipInvoices"
-            android:text="@string/invoices"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:id="@+id/chipCar"
+            android:text="@string/car"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/car_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -77,11 +75,10 @@
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chipFuel"
-            android:text="@string/fuel"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:id="@+id/chipElectric"
+            android:text="@string/electric"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/lightbulb_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -89,11 +86,10 @@
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chipAnother"
-            android:text="@string/another"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:id="@+id/chipWater"
+            android:text="@string/water"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/water_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -101,11 +97,21 @@
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chipBill"
-            android:text="@string/bill"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:id="@+id/chipFire"
+            android:text="@string/gas"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/fire_icon"
+            app:chipIconEnabled="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice">
+        </com.google.android.material.chip.Chip>
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipInternet"
+            android:text="@string/internet"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/internet_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -115,10 +121,55 @@
             android:layout_height="wrap_content"
             android:id="@+id/chipPhone"
             android:text="@string/phone"
-            app:chipBackgroundColor="#B39DDB"
-            android:textColor="#FFFFFF"
-            app:chipIcon="@drawable/baseline_alternate_email_24"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/phone_icon"
+            app:chipIconEnabled="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice">
+        </com.google.android.material.chip.Chip>
 
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipMarket"
+            android:text="@string/market"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/market_icon"
+            app:chipIconEnabled="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice">
+        </com.google.android.material.chip.Chip>
+
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipClothes"
+            android:text="@string/clothes"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/clothes_icon"
+            app:chipIconEnabled="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice">
+        </com.google.android.material.chip.Chip>
+
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipEducation"
+            android:text="@string/education"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/education_icon"
+            app:chipIconEnabled="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice">
+        </com.google.android.material.chip.Chip>
+
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipOthers"
+            android:text="@string/others"
+            android:textColor="#000000"
+            app:chipIcon="@drawable/others_icon"
             app:chipIconEnabled="true"
             style="@style/Widget.MaterialComponents.Chip.Choice">
         </com.google.android.material.chip.Chip>
@@ -130,7 +181,7 @@
         android:layout_height="50dp"
         android:id="@+id/editTextAmount"
         android:hint="@string/amount"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:padding="10dp"

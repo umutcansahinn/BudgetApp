@@ -43,7 +43,7 @@ class FirebaseFirestoreDatabaseImpl @Inject constructor(
             Constants.IS_INCOME to isIncome,
             Constants.IS_REGULAR to isRegular,
             Constants.TYPE to type,
-            Constants.DATE to date,
+            Constants.DATE to date.toString(),
             Constants.USER_ID to currentUserId
         )
         firestore.collection(Constants.COLLECTION_PATH_BUDGET)

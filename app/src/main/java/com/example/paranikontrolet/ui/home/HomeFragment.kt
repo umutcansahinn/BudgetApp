@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class HomeFragment : BaseFragment() {
                     }
                     is Resource.Error -> {
                         binding.textViewError.text = it.message.toString()
+
 
                         binding.textViewError.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.GONE

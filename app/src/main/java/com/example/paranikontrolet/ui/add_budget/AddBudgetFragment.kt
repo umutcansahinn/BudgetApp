@@ -1,15 +1,12 @@
 package com.example.paranikontrolet.ui.add_budget
 
-import android.os.BugreportManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
-import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.FragmentAddBudgetBinding
 import com.example.paranikontrolet.ui.base.BaseFragment
 import com.example.paranikontrolet.utils.Constants
@@ -60,11 +57,16 @@ class AddBudgetFragment : BaseFragment() {
             when (checkedId) {
                 R.id.chipIncome -> type = binding.chipIncome.text.toString()
                 R.id.chipRent -> type = binding.chipRent.text.toString()
-                R.id.chipInvoices -> type = binding.chipInvoices.text.toString()
-                R.id.chipFuel -> type = binding.chipFuel.text.toString()
-                R.id.chipAnother -> type = binding.chipAnother.text.toString()
-                R.id.chipBill -> type = binding.chipBill.text.toString()
+                R.id.chipCar -> type = binding.chipCar.text.toString()
+                R.id.chipElectric -> type = binding.chipElectric.text.toString()
+                R.id.chipWater -> type = binding.chipWater.text.toString()
+                R.id.chipFire -> type = binding.chipFire.text.toString()
+                R.id.chipInternet -> type = binding.chipInternet.text.toString()
                 R.id.chipPhone -> type = binding.chipPhone.text.toString()
+                R.id.chipMarket -> type = binding.chipMarket.text.toString()
+                R.id.chipClothes -> type = binding.chipClothes.text.toString()
+                R.id.chipEducation -> type = binding.chipEducation.text.toString()
+                R.id.chipOthers -> type = binding.chipOthers.text.toString()
             }
         }
 
@@ -97,9 +99,7 @@ class AddBudgetFragment : BaseFragment() {
                     selectedUtc.get(Calendar.MONTH),
                     selectedUtc.get(Calendar.DATE)
                 )
-                Log.d("time_time", selectedLocal.time.toString())
                 selectedDate = selectedLocal.time
-                Log.d("time_time_2", selectedDate.toString())
                 binding.buttonCalender.text =
                     selectedLocal.time.toFormat(Constants.CURRENT_DATE_FORMAT)
             }
