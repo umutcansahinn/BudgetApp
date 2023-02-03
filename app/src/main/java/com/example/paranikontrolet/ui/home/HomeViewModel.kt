@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.paranikontrolet.data.model.Budget
+import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
 import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
 import com.example.paranikontrolet.utils.Resource
@@ -19,8 +20,8 @@ private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases,
 private val firebaseAuthUseCases: FirebaseAuthUseCases
 ) : ViewModel() {
 
-    private val _result = MutableLiveData<Resource<List<Budget>>?>()
-    val result: LiveData<Resource<List<Budget>>?> = _result
+    private val _result = MutableLiveData<Resource<List<BudgetUiModel>>>()
+    val result: LiveData<Resource<List<BudgetUiModel>>> = _result
 
 
     fun getBudgetFromFirestore() {

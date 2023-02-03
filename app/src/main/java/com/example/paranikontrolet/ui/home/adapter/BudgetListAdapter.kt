@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
+import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.Constants
 import com.example.paranikontrolet.utils.toFormat
 
 class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
 
-    val budgetList = ArrayList<Budget>()
+    val budgetList = ArrayList<BudgetUiModel>()
 
     class ViewHolder(val binding: ItemHomeRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -49,7 +50,7 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         }
     }
 
-    fun updateList(newToDoList: List<Budget>) {
+    fun updateList(newToDoList: List<BudgetUiModel>) {
         budgetList.clear()
         budgetList.addAll(newToDoList)
         notifyDataSetChanged()

@@ -2,6 +2,7 @@ package com.example.paranikontrolet.di
 
 import com.example.paranikontrolet.data.repository.FirebaseAuthenticatorImpl
 import com.example.paranikontrolet.data.repository.FirebaseFirestoreDatabaseImpl
+import com.example.paranikontrolet.domain.mapper.BudgetMapper
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
@@ -56,14 +57,24 @@ object AppModule {
             getCurrentUserInfoUseCase = GetCurrentUserInfoUseCase(auth = auth)
         )
     }
+    @Provides
+    @Singleton
+    fun provideBudgetMapper(): BudgetMapper {
+        return BudgetMapper()
+    }
 
     @Provides
     @Singleton
     fun provideFirebaseFirestoreUseCases(
-        firestore: FirebaseFirestoreDatabase): FirebaseFirestoreUseCases {
+        firestore: FirebaseFirestoreDatabase,
+        mapper: BudgetMapper
+    ): FirebaseFirestoreUseCases {
 
         return FirebaseFirestoreUseCases(
-            getBudgetFromFirestoreUseCase = GetBudgetFromFirestoreUseCase(firestore = firestore) ,
+            getBudgetFromFirestoreUseCase = GetBudgetFromFirestoreUseCase(
+                firestore = firestore,
+                mapper = mapper
+            ) ,
             saveBudgetUseCase = SaveBudgetUseCase(firestore = firestore),
             saveUserUseCase = SaveUserUseCase(firestore = firestore)
         )
