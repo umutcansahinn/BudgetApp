@@ -7,5 +7,7 @@ data class BudgetUiModel(
     val isIncome: Boolean,
     val isRegular: Boolean,
     val type: String,
-    val date: Date
+    val date: Date,
+    val icon: Int
+
 )
