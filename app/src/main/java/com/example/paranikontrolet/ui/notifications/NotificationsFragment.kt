@@ -47,12 +47,19 @@ class NotificationsFragment : BaseFragment() {
                     it.data?.let {
                         showCalendar(it)
                     }
-
+                    binding.calendarView.visibility = View.VISIBLE
+                    binding.textViewError.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Error -> {
-
+                    binding.calendarView.visibility = View.GONE
+                    binding.textViewError.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Loading -> {
+                    binding.calendarView.visibility = View.GONE
+                    binding.textViewError.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }
