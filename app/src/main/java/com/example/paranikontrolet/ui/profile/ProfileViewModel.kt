@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.ui.dashboard
+package com.example.paranikontrolet.ui.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
     private val authUseCase: AuthUseCase
 ) : ViewModel() {
 

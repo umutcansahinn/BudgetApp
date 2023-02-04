@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.ui.notifications
+package com.example.paranikontrolet.ui.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationsViewModel @Inject constructor(
+class CalendarViewModel @Inject constructor(
     private val firestoreUseCase: FirestoreUseCase,
     private val authUseCase: AuthUseCase
 ) : ViewModel() {

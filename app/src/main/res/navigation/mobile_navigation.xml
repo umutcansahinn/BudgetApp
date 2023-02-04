@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/navigation_splash">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -12,38 +12,38 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_addCashFlowFragment"
-            app:destination="@id/addCashFlowFragment" />
+            app:destination="@id/navigation_add_budget" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.paranikontrolet.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        android:id="@+id/navigation_profile"
+        android:name="com.example.paranikontrolet.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_navigation_dashboard_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/navigation_sign_in" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.paranikontrolet.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.paranikontrolet.ui.calendar.CalendarFragment"
+        android:label="@string/title_calendar"
+        tools:layout="@layout/fragment_calendar" />
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@+id/navigation_splash"
         android:name="com.example.paranikontrolet.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/navigation_sign_in" />
         <action
             android:id="@+id/action_splashFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
     <fragment
-        android:id="@+id/signInFragment"
+        android:id="@+id/navigation_sign_in"
         android:name="com.example.paranikontrolet.ui.sign_in.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
@@ -52,10 +52,10 @@
             app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/navigation_sign_up" />
     </fragment>
     <fragment
-        android:id="@+id/signUpFragment"
+        android:id="@+id/navigation_sign_up"
         android:name="com.example.paranikontrolet.ui.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
@@ -64,11 +64,16 @@
             app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/navigation_sign_in" />
     </fragment>
     <fragment
-        android:id="@+id/addCashFlowFragment"
+        android:id="@+id/navigation_add_budget"
         android:name="com.example.paranikontrolet.ui.add_budget.AddBudgetFragment"
-        android:label="fragment_add_cash_flow"
+        android:label="@string/title_add_budget"
         tools:layout="@layout/fragment_add_budget" />
+    <fragment
+        android:id="@+id/navigation_chart"
+        android:name="com.example.paranikontrolet.ui.chart.ChartFragment"
+        android:label="@string/title_chart"
+        tools:layout="@layout/fragment_chart" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.ui.notifications
+package com.example.paranikontrolet.ui.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.applandeo.materialcalendarview.EventDay
-import com.example.paranikontrolet.databinding.FragmentNotificationsBinding
+import com.example.paranikontrolet.databinding.FragmentCalendarBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.ui.base.BaseFragment
 import com.example.paranikontrolet.utils.Resource
@@ -15,19 +15,19 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class NotificationsFragment : BaseFragment() {
+class CalendarFragment : BaseFragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: NotificationsViewModel by viewModels()
+    private val viewModel: CalendarViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }
