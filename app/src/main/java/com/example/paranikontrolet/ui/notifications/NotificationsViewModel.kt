@@ -3,16 +3,29 @@ package com.example.paranikontrolet.ui.notifications
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
+import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
+import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
+import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NotificationsViewModel @Inject constructor(
-
+    private val firebaseFirestoreUseCases: FirebaseFirestoreUseCases,
+    private val firebaseAuthUseCases: FirebaseAuthUseCases
 ) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private val _result = MutableLiveData<Resource<List<BudgetUiModel>>>()
+    val result: LiveData<Resource<List<BudgetUiModel>>> = _result
+
+    fun getBudgetFromFirestore() {
+        viewModelScope.launch {
+            val userId = firebaseAuthUseCases.getCurrentUserInfoUseCase()
+            _result.value = firebaseFirestoreUseCases.getBudgetFromFirestoreUseCase(userId!!.uid)
+        }
     }
-    val text: LiveData<String> = _text
+
 }

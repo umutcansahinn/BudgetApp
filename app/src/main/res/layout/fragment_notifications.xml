@@ -8,13 +8,11 @@
     tools:context=".ui.notifications.NotificationsFragment">
 
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-    </CalendarView>
+<com.applandeo.materialcalendarview.CalendarView
+    android:id="@+id/calendarView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent">
+</com.applandeo.materialcalendarview.CalendarView>
 </androidx.constraintlayout.widget.ConstraintLayout>
