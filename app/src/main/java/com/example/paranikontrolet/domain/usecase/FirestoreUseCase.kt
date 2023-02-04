@@ -4,7 +4,7 @@ import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.Get
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudgetUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUserUseCase
 
-data class FirebaseFirestoreUseCases(
+data class FirestoreUseCase(
     val getBudgetFromFirestoreUseCase: GetBudgetFromFirestoreUseCase,
     val saveBudgetUseCase: SaveBudgetUseCase,
     val saveUserUseCase: SaveUserUseCase

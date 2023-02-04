@@ -42,14 +42,9 @@ class AddBudgetFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeEvent()
         initViews()
-
     }
 
-    private fun observeEvent() {
-
-    }
 
     private fun initViews() {
 

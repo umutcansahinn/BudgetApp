@@ -2,7 +2,6 @@ package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
 
 import android.util.Log
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
-import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
 import java.util.*
 import javax.inject.Inject
 

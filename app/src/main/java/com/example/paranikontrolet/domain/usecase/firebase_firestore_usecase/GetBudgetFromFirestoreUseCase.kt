@@ -38,5 +38,3 @@ class GetBudgetFromFirestoreUseCase @Inject constructor(
         }
     }
 }
-
-//java.sql.Date.valueOf(it.get(Constants.DATE).toString())

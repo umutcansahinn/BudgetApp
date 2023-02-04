@@ -5,8 +5,8 @@ import com.example.paranikontrolet.data.repository.FirebaseFirestoreDatabaseImpl
 import com.example.paranikontrolet.domain.mapper.BudgetMapper
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
-import com.example.paranikontrolet.domain.usecase.FirebaseAuthUseCases
-import com.example.paranikontrolet.domain.usecase.FirebaseFirestoreUseCases
+import com.example.paranikontrolet.domain.usecase.AuthUseCase
+import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.*
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestoreUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudgetUseCase
@@ -48,8 +48,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAuthUseCases(auth: FirebaseAuthenticator): FirebaseAuthUseCases {
-        return FirebaseAuthUseCases(
+    fun provideFirebaseAuthUseCases(auth: FirebaseAuthenticator): AuthUseCase {
+        return AuthUseCase(
             getCurrentUserUseCase = GetCurrentUserUseCase(auth = auth),
             signInUseCase = SignInUseCase(auth = auth),
             signOutUseCase = SignOutUseCase(auth = auth),
@@ -68,9 +68,9 @@ object AppModule {
     fun provideFirebaseFirestoreUseCases(
         firestore: FirebaseFirestoreDatabase,
         mapper: BudgetMapper
-    ): FirebaseFirestoreUseCases {
+    ): FirestoreUseCase {
 
-        return FirebaseFirestoreUseCases(
+        return FirestoreUseCase(
             getBudgetFromFirestoreUseCase = GetBudgetFromFirestoreUseCase(
                 firestore = firestore,
                 mapper = mapper

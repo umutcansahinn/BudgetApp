@@ -1,13 +1,11 @@
 package com.example.paranikontrolet.ui.notifications
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.applandeo.materialcalendarview.EventDay
-import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentNotificationsBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.ui.base.BaseFragment

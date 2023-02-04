@@ -1,7 +1,6 @@
 package com.example.paranikontrolet.domain.mapper
 
 import android.graphics.Color
-import androidx.annotation.StringRes
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel

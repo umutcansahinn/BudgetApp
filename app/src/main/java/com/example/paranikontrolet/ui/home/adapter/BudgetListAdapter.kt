@@ -1,16 +1,9 @@
 package com.example.paranikontrolet.ui.home.adapter
 
-import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
-import com.example.paranikontrolet.R
-import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.Constants
