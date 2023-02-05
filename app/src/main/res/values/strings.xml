@@ -45,5 +45,8 @@
     <string name="clothes">clothes</string>
     <string name="others">others</string>
     <string name="loginimage">loginImage</string>
+    <string name="text_view_date">12/12/1212</string>
+    <string name="text_view_amount">250</string>
+    <string name="text_view_type">income</string>
 
 </resources>
