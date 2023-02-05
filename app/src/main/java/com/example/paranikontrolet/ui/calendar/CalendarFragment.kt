@@ -5,10 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.applandeo.materialcalendarview.EventDay
 import com.example.paranikontrolet.databinding.FragmentCalendarBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.ui.calendar.adapter.CalendarListAdapter
+import com.example.paranikontrolet.ui.home.adapter.BudgetListAdapter
 import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -21,6 +26,8 @@ class CalendarFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CalendarViewModel by viewModels()
+
+    private val calendarListAdapter = CalendarListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +53,7 @@ class CalendarFragment : BaseFragment() {
                 is Resource.Success -> {
                     it.data?.let {
                         showCalendar(it)
+                        showRecyclerView(it)
                     }
                     binding.calendarView.visibility = View.VISIBLE
                     binding.textViewError.visibility = View.GONE
@@ -69,9 +77,12 @@ class CalendarFragment : BaseFragment() {
         bottomNavigationViewVisibility = View.VISIBLE
         toolbarVisibility = true
 
-        binding.calendarView.setOnDayClickListener {
-            //TODO takvim üzerinden bir gün'e tıklandığında detay göster
-        }
+        binding.recyclerView.adapter = calendarListAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
     }
 
     private fun showCalendar(list: List<BudgetUiModel>) {
@@ -85,6 +96,16 @@ class CalendarFragment : BaseFragment() {
         }
         binding.calendarView.setEvents(event)
 
+    }
+
+    private fun showRecyclerView(list: List<BudgetUiModel>) {
+        binding.calendarView.setOnDayClickListener { eventDay->
+            list.filter { budget->
+                budget.date.time == eventDay.calendar.time.time
+            }.run {
+                calendarListAdapter.updateList(this)
+            }
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
