@@ -13,7 +13,6 @@
     android:id="@+id/calendarView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="visible"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent">
 </com.applandeo.materialcalendarview.CalendarView>

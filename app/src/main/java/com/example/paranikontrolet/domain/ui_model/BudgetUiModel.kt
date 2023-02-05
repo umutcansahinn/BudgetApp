@@ -10,6 +10,7 @@ data class BudgetUiModel(
     val date: Date,
     val icon: Int,
     val textColor: Int,
-    val strokeColor: Int
+    val strokeColor: Int,
+    val chartColor: String
 
 )

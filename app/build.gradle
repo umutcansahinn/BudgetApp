@@ -80,4 +80,7 @@ dependencies {
     //calendar
     implementation 'com.applandeo:material-calendar-view:1.7.0'
 
+    //Chart library
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }
