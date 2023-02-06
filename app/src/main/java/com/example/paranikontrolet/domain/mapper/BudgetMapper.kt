@@ -59,8 +59,8 @@ class BudgetMapper {
         else -> "#D50000"
     }
 
-    private fun Budget.getCardColor() = when(type) {
-        "income" -> "#63FF00"
+    private fun Budget.getCardColor() = when(isIncome) {
+        true -> "#63FF00"
         else -> "#FF0000"
     }
 }

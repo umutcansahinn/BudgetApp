@@ -14,6 +14,7 @@ import com.example.paranikontrolet.utils.Resource
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,6 +46,17 @@ class ChartFragment : BaseFragment() {
 
     private fun initViews() {
 
+        binding.switchType.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                binding.barChart.visibility = View.VISIBLE
+                binding.pieChart.visibility = View.GONE
+            } else {
+                binding.barChart.visibility = View.GONE
+                binding.pieChart.visibility = View.VISIBLE
+            }
+        }
+
+
         bottomNavigationViewVisibility = View.VISIBLE
         toolbarVisibility = true
     }
@@ -54,20 +66,11 @@ class ChartFragment : BaseFragment() {
             when (it) {
                 is Resource.Success -> {
                     it.data?.let { list ->
-                        binding.switchType.setOnCheckedChangeListener { buttonView, isChecked ->
-                            if (isChecked) {
-                                setBarChart(list)
-                                binding.barChart.visibility = View.VISIBLE
-                                binding.pieChart.visibility = View.GONE
-                            } else {
-                                setPieChart(list)
-                                binding.barChart.visibility = View.GONE
-                                binding.pieChart.visibility = View.VISIBLE
-                            }
-                        }
-                        binding.textViewError.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
+                        setBarChart(list)
+                        setPieChart(list)
                     }
+                    binding.textViewError.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Error -> {
                     binding.textViewError.visibility = View.VISIBLE
@@ -139,8 +142,8 @@ class ChartFragment : BaseFragment() {
         val barData = BarData(barDataSet)
         binding.barChart.setFitBars(false)
         binding.barChart.data = barData
-        // binding.barChart.description.text = "Bar Chart"
-        // binding.barChart.xAxis.valueFormatter = IndexAxisValueFormatter(type)
+        binding.barChart.description.text = "Bar Chart"
+        binding.barChart.xAxis.valueFormatter = IndexAxisValueFormatter()
         binding.barChart.xAxis.position = XAxis.XAxisPosition.TOP
         binding.barChart.animateY(2000)
 

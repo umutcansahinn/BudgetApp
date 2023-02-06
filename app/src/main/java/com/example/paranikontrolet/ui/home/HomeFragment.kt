@@ -49,7 +49,8 @@ class HomeFragment : BaseFragment() {
                 when(it) {
                     is Resource.Success -> {
                         if (it.data != null) {
-                            budgetListAdapter.updateList(it.data)
+                            val newList = it.data.sortedWith(compareByDescending { it.date })
+                            budgetListAdapter.updateList(newList)
 
                             binding.recyclerView.visibility = View.VISIBLE
                             binding.progressBar.visibility = View.GONE
