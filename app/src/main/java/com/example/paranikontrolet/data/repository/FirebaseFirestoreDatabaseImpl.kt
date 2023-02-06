@@ -4,7 +4,6 @@ import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.utils.Constants
 import com.google.firebase.firestore.*
 import kotlinx.coroutines.tasks.await
-import java.util.Date
 import javax.inject.Inject
 
 class FirebaseFirestoreDatabaseImpl @Inject constructor(
@@ -30,24 +29,9 @@ class FirebaseFirestoreDatabaseImpl @Inject constructor(
             .set(user).await()
     }
 
-    override suspend fun saveBudget(
-        amount: Float,
-        isIncome: Boolean,
-        isRegular: Boolean,
-        type: String,
-        date: Date,
-        currentUserId: String
-    ) {
-        val budget = hashMapOf<String, Any>(
-            Constants.AMOUNT to amount,
-            Constants.IS_INCOME to isIncome,
-            Constants.IS_REGULAR to isRegular,
-            Constants.TYPE to type,
-            Constants.DATE to date.time,
-            Constants.USER_ID to currentUserId
-        )
+    override suspend fun saveBudget(hashMap: HashMap<String,Any>) {
         firestore.collection(Constants.COLLECTION_PATH_BUDGET)
-            .add(budget).await()
+            .add(hashMap).await()
     }
     override suspend fun getBudgetDocuments(userId: String): QuerySnapshot {
             return firestore.collection(Constants.COLLECTION_PATH_BUDGET)

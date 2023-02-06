@@ -14,7 +14,6 @@ class BudgetMapper {
     private fun Budget.toUiModel() = BudgetUiModel(
         amount = getAmount(),
         isIncome = getIncome(),
-        isRegular = getIsRegular(),
         type = getType(),
         date = getDate(),
         icon = getIcon(),
@@ -26,7 +25,6 @@ class BudgetMapper {
 
     private fun Budget.getAmount() = amount
     private fun Budget.getIncome() = isIncome
-    private fun Budget.getIsRegular() = isRegular
     private fun Budget.getType() = type
     private fun Budget.getDate() = date
     private fun Budget.getIcon() = when(type) {

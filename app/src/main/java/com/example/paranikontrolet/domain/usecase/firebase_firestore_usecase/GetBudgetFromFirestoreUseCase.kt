@@ -24,7 +24,6 @@ class GetBudgetFromFirestoreUseCase @Inject constructor(
                 val budget = Budget(
                     amount = it.get(Constants.AMOUNT).toString().toFloat(),
                     isIncome = it.get(Constants.IS_INCOME).toString().toBoolean(),
-                    isRegular = it.get(Constants.IS_REGULAR).toString().toBoolean(),
                     type = it.get(Constants.TYPE).toString(),
                     date = Date(it.get(Constants.DATE).toString().toLong())
                 ).run {

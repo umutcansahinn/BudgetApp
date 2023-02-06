@@ -1,7 +1,7 @@
 package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
 
-import android.util.Log
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
+import com.example.paranikontrolet.utils.Constants
 import java.util.*
 import javax.inject.Inject
 
@@ -12,7 +12,6 @@ class SaveBudgetUseCase @Inject constructor(
     suspend operator fun invoke(
         amount: Float?,
         isIncome: Boolean?,
-        isRegular: Boolean?,
         type: String?,
         date: Date?,
         currentUserId: String?
@@ -21,20 +20,18 @@ class SaveBudgetUseCase @Inject constructor(
         if (
             amount != null &&
             isIncome != null &&
-            isRegular != null &&
             type != null &&
             date != null &&
             currentUserId != null
         ) {
-            firestore.saveBudget(
-                amount = amount,
-                isIncome = isIncome,
-                isRegular = isRegular,
-                type = type,
-                date = date,
-                currentUserId = currentUserId
+            val hashMap = hashMapOf<String, Any>(
+                Constants.AMOUNT to amount,
+                Constants.IS_INCOME to isIncome,
+                Constants.TYPE to type,
+                Constants.DATE to date.time,
+                Constants.USER_ID to currentUserId
             )
-            Log.d("result", "useCase ok")
+            firestore.saveBudget(hashMap = hashMap)
         }
     }
 }

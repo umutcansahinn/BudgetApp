@@ -146,16 +146,12 @@ class ChartFragment : BaseFragment() {
         binding.barChart.xAxis.valueFormatter = IndexAxisValueFormatter()
         binding.barChart.xAxis.position = XAxis.XAxisPosition.TOP
         binding.barChart.animateY(2000)
-
-
     }
 
     private fun setPieChart(list: List<BudgetUiModel>) {
 
         var incomeAmount = 0f
         var expenseAmount = 0f
-
-
 
         list.forEach {
             when (it.isIncome) {
@@ -166,8 +162,8 @@ class ChartFragment : BaseFragment() {
                     expenseAmount += it.amount
                 }
             }
-
         }
+
         val pieEntry = mutableListOf<PieEntry>()
         pieEntry.add(PieEntry(incomeAmount, "income", "income"))
         pieEntry.add(PieEntry(expenseAmount, "expense", "expense"))
@@ -183,7 +179,6 @@ class ChartFragment : BaseFragment() {
         binding.pieChart.data = data
         binding.pieChart.animateY(2000)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

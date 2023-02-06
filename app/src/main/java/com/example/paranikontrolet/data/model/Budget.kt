@@ -5,7 +5,6 @@ import java.util.*
 data class Budget(
     val amount: Float,
     val isIncome: Boolean,
-    val isRegular: Boolean,
     val type: String,
     val date: Date
 )

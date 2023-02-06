@@ -13,12 +13,7 @@ interface FirebaseFirestoreDatabase {
     )
 
     suspend fun saveBudget(
-        amount: Float,
-        isIncome: Boolean,
-        isRegular: Boolean,
-        type: String,
-        date: Date,
-        currentUserId: String
+        hashMap: HashMap<String,Any>
     )
     suspend fun getBudgetDocuments(userId: String): QuerySnapshot
 

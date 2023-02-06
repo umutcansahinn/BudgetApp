@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paranikontrolet.databinding.ItemCalendarRecyclerviewBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
-import com.example.paranikontrolet.utils.Constants
-import com.example.paranikontrolet.utils.toFormat
 
 class CalendarListAdapter : RecyclerView.Adapter<CalendarListAdapter.ViewHolder>() {
 

@@ -25,7 +25,6 @@ class AddBudgetFragment : BaseFragment() {
 
     private var amount: Float? = null
     private var isIncome: Boolean? = null
-    private var isRegular: Boolean? = null
     private var type: String? = null
     private var selectedDate: Date? = null
 
@@ -71,12 +70,6 @@ class AddBudgetFragment : BaseFragment() {
         binding.switchExpense.setOnClickListener {
             binding.switchIncome.isChecked = !binding.switchIncome.isChecked
         }
-        binding.switchRegular.setOnClickListener {
-            binding.switchNotRegular.isChecked = !binding.switchNotRegular.isChecked
-        }
-        binding.switchNotRegular.setOnClickListener {
-            binding.switchRegular.isChecked = !binding.switchRegular.isChecked
-        }
 
         binding.buttonCalender.setOnClickListener {
             val datePicker =
@@ -106,18 +99,15 @@ class AddBudgetFragment : BaseFragment() {
 
             amount = binding.editTextAmount.text.toString().toFloatOrNull()
             isIncome = binding.switchIncome.isChecked
-            isRegular = binding.switchRegular.isChecked
 
             viewModel.addBudget(
                 amount = amount,
                 isIncome = isIncome,
-                isRegular = isRegular,
                 type = type,
                 date = selectedDate
             )
             findNavController().popBackStack()
         }
-
 
         bottomNavigationViewVisibility = View.GONE
         toolbarVisibility = true

@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.applandeo.materialcalendarview.EventDay
 import com.example.paranikontrolet.databinding.FragmentCalendarBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.ui.base.BaseFragment
 import com.example.paranikontrolet.ui.calendar.adapter.CalendarListAdapter
-import com.example.paranikontrolet.ui.home.adapter.BudgetListAdapter
 import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
