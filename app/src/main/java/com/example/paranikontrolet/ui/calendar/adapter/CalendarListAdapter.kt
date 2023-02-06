@@ -1,5 +1,6 @@
 package com.example.paranikontrolet.ui.calendar.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,11 +32,8 @@ class CalendarListAdapter : RecyclerView.Adapter<CalendarListAdapter.ViewHolder>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textViewAmount.text = calendarList[position].amount.toString()
         holder.binding.textViewType.text = calendarList[position].type
-        holder.binding.textViewDate.text =
-            calendarList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
         holder.binding.imageViewIcon.setImageResource(calendarList[position].icon)
-        holder.binding.textViewAmount.setTextColor(calendarList[position].textColor)
-        holder.binding.cardView.setStrokeColor(calendarList[position].strokeColor)
+        holder.binding.cardView.setCardBackgroundColor(Color.parseColor(calendarList[position].cardColor))
 
     }
 

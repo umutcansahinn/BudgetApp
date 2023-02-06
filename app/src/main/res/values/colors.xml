@@ -38,5 +38,8 @@
     <color name="chart_color_11">#C51162</color>
     <color name="chart_color_12">#D50000</color>
 
+    <color name="card_color_green">#63FF00</color>
+    <color name="card_color_red">#FF0000</color>
+
 
 </resources>

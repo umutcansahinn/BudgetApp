@@ -53,35 +53,33 @@ class ChartFragment : BaseFragment() {
         viewModel.result.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    it.data?.let {
-
+                    it.data?.let { list ->
                         binding.switchType.setOnCheckedChangeListener { buttonView, isChecked ->
                             if (isChecked) {
-                                setBarChart(it)
+                                setBarChart(list)
                                 binding.barChart.visibility = View.VISIBLE
                                 binding.pieChart.visibility = View.GONE
                             } else {
-                                setPieChart(it)
+                                setPieChart(list)
                                 binding.barChart.visibility = View.GONE
                                 binding.pieChart.visibility = View.VISIBLE
                             }
                         }
-                        setBarChart(it)
-                        setPieChart(it)
-                    }/*
-                    binding.calendarView.visibility = View.VISIBLE
-                    binding.textViewError.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE*/
+                        binding.textViewError.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                    }
                 }
-                is Resource.Error -> {/*
-                    binding.calendarView.visibility = View.GONE
+                is Resource.Error -> {
                     binding.textViewError.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE*/
+                    binding.progressBar.visibility = View.GONE
+                    binding.barChart.visibility = View.GONE
+                    binding.pieChart.visibility = View.GONE
                 }
-                is Resource.Loading -> {/*
-                    binding.calendarView.visibility = View.GONE
+                is Resource.Loading -> {
                     binding.textViewError.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE*/
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.barChart.visibility = View.GONE
+                    binding.pieChart.visibility = View.GONE
                 }
             }
         }
@@ -120,8 +118,7 @@ class ChartFragment : BaseFragment() {
                 else -> others += it.amount
             }
         }
-
-        barEntry.add(BarEntry(1f, income,R.drawable.income_icon))
+        barEntry.add(BarEntry(1f, income, R.drawable.income_icon))
         barEntry.add(BarEntry(2f, rent, R.drawable.home_icon))
         barEntry.add(BarEntry(3f, car, R.drawable.car_icon))
         barEntry.add(BarEntry(4f, electric, R.drawable.lightbulb_icon))

@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.ui.home.adapter
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,8 +36,7 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         holder.binding.textViewDate.text =
             budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
         holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
-        holder.binding.textViewAmount.setTextColor(budgetList[position].textColor)
-        holder.binding.cardView.setStrokeColor(budgetList[position].strokeColor)
+        holder.binding.cardView.setCardBackgroundColor(Color.parseColor(budgetList[position].cardColor))
 
     }
 

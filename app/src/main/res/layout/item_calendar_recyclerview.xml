@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/back_ground_red"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
         android:elevation="11dp"
@@ -47,7 +47,9 @@
                     android:id="@+id/textViewType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/asap"
                     android:text="@string/text_view_type"
+                    android:textColor="@color/white"
                     android:textSize="22sp"
                     app:layout_constraintLeft_toRightOf="@id/imageViewIcon"
                     app:layout_constraintTop_toTopOf="@id/imageViewIcon">
@@ -58,8 +60,10 @@
                     android:id="@+id/textViewAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/asap"
                     android:text="@string/text_view_amount"
                     android:textSize="19sp"
+                    android:textColor="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/textViewType"
                     app:layout_constraintLeft_toRightOf="@id/imageViewIcon"
                     app:layout_constraintBottom_toBottomOf="@id/imageViewIcon">
@@ -67,16 +71,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textViewDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_view_date"
-                android:textSize="19sp"
-                app:layout_constraintTop_toTopOf="@id/textViewType"
-                app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
-                app:layout_constraintLeft_toRightOf="@id/textViewType">
-            </TextView>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
