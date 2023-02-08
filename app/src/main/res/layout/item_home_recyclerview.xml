@@ -24,7 +24,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <TextView
                 android:id="@+id/textViewType"
@@ -32,9 +32,11 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/asap"
                 android:text="@string/text_view_type"
-                android:textSize="25sp"
+                android:layout_marginStart="4dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
+                app:layout_constraintBottom_toTopOf="@id/textViewAmount"
                 app:layout_constraintLeft_toRightOf="@id/imageViewIcon"
                 app:layout_constraintTop_toTopOf="@id/imageViewIcon">
             </TextView>
@@ -44,12 +46,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_view_amount"
-                android:textSize="22sp"
+                android:textSize="18sp"
+                android:layout_marginStart="4dp"
                 android:fontFamily="@font/asap"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewIcon"
-                app:layout_constraintLeft_toLeftOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/textViewType"
+                app:layout_constraintLeft_toRightOf="@+id/imageViewIcon"
+                app:layout_constraintBottom_toBottomOf="@id/imageViewIcon">
             </TextView>
 
             <TextView
@@ -58,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/asap"
                 android:text="@string/text_view_date"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/imageViewIcon"
                 app:layout_constraintRight_toRightOf="parent"
@@ -68,9 +71,9 @@
             <ImageView
                 android:id="@+id/imageViewIcon"
                 android:layout_width="wrap_content"
-                android:padding="4dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/education_icon"
+                android:layout_marginStart="4dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
             </ImageView>
