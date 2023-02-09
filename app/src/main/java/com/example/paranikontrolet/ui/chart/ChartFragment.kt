@@ -26,6 +26,19 @@ class ChartFragment : BaseFragment() {
 
     private val viewModel: ChartViewModel by viewModels()
 
+    private var income = 0f
+    private var rent = 0f
+    private var car = 0f
+    private var electric = 0f
+    private var water = 0f
+    private var gas = 0f
+    private var internet = 0f
+    private var phone = 0f
+    private var market = 0f
+    private var clothes = 0f
+    private var education = 0f
+    private var others = 0f
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -92,32 +105,20 @@ class ChartFragment : BaseFragment() {
 
         val barEntry = ArrayList<BarEntry>()
 
-        var income = 0f
-        var rent = 0f
-        var car = 0f
-        var electric = 0f
-        var water = 0f
-        var gas = 0f
-        var internet = 0f
-        var phone = 0f
-        var market = 0f
-        var clothes = 0f
-        var education = 0f
-        var others = 0f
 
         list.forEach {
             when (it.type) {
-                "income" -> income += it.amount
-                "rent" -> rent += it.amount
-                "car" -> car += it.amount
-                "electric" -> electric += it.amount
-                "water" -> water += it.amount
-                "gas" -> gas += it.amount
-                "internet" -> internet += it.amount
-                "phone" -> phone += it.amount
-                "market" -> market += it.amount
-                "clothes" -> clothes += it.amount
-                "education" -> education += it.amount
+                Type.INCOME.type -> income += it.amount
+                Type.RENT.type -> rent += it.amount
+                Type.CAR.type -> car += it.amount
+                Type.ELECTRIC.type -> electric += it.amount
+                Type.WATER.type -> water += it.amount
+                Type.GAS.type -> gas += it.amount
+                Type.INTERNET.type -> internet += it.amount
+                Type.PHONE.type -> phone += it.amount
+                Type.MARKET.type -> market += it.amount
+                Type.CLOTHES.type -> clothes += it.amount
+                Type.EDUCATION.type -> education += it.amount
                 else -> others += it.amount
             }
         }
@@ -184,4 +185,19 @@ class ChartFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+}
+
+enum class Type(val type: String) {
+    INCOME("income"),
+    RENT("rent"),
+    CAR("car"),
+    ELECTRIC("electric"),
+    WATER("water"),
+    GAS("gas"),
+    INTERNET("internet"),
+    PHONE("phone"),
+    MARKET("market"),
+    CLOTHES("clothes"),
+    EDUCATION("education"),
+    OTHERS("others")
 }
