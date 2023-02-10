@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
@@ -42,7 +43,23 @@ class SignInFragment : BaseFragment() {
 
     private fun observeEvent() {
         viewModel.authResult.observe(viewLifecycleOwner) {
-            when(it) {
+           when(it) {
+               is SignInUiState.SignInIsFailure-> {
+                    Toast.makeText(context,it.value,Toast.LENGTH_SHORT).show()
+               }
+               is SignInUiState.VerificationIsFailure-> {
+                   Toast.makeText(context,it.value,Toast.LENGTH_SHORT).show()
+               }
+               is SignInUiState.VerificationIsSuccess-> {
+                   Toast.makeText(context,"giris basarılı",Toast.LENGTH_SHORT).show()
+                   findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
+               }
+               is SignInUiState.Loading-> {
+
+               }
+           }
+
+        /* when(it) {
                 is Resource.Success -> {
                     binding.progressBar.gone()
                     findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
@@ -54,7 +71,7 @@ class SignInFragment : BaseFragment() {
                 is Resource.Loading -> {
                     binding.progressBar.visible()
                 }
-            }
+            }*/
         }
     }
 

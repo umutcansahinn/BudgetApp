@@ -9,10 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentSignUpBinding
 import com.example.paranikontrolet.ui.base.BaseFragment
-import com.example.paranikontrolet.utils.Resource
-import com.example.paranikontrolet.utils.gone
-import com.example.paranikontrolet.utils.showSnackbar
-import com.example.paranikontrolet.utils.visible
+import com.example.paranikontrolet.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,6 +45,11 @@ class SignUpFragment : BaseFragment() {
                 verifyPassword = binding.editTextVerifyPassword.text.toString()
             )
 
+            binding.editTextEmail.text?.clear()
+            binding.editTextName.text?.clear()
+            binding.editTextPassword.text?.clear()
+            binding.editTextVerifyPassword.text?.clear()
+
         }
         binding.textViewSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
@@ -60,27 +62,37 @@ class SignUpFragment : BaseFragment() {
 
     private fun observeEvent() {
         viewModel.authResult.observe(viewLifecycleOwner) {
+
             when(it) {
-                is Resource.Success -> {
+                is SignUpUiState.SendEmailIsSuccess -> {
+                    requireView().showSnackbarWithButton(it.value) {
+                        findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+                    }
+                }
+                is SignUpUiState.SendEmailIsFailure-> {
+                    requireView().showSnackbar(it.value)
+                }
+                is SignUpUiState.SignUpIsSuccess-> {
                     binding.progressBar.gone()
                     viewModel.saveUser(
-                        getFirebaseUserUid = it.data?.user?.uid!!,
+                        getFirebaseUserUid = it.result.user?.uid!!,
                         email = binding.editTextEmail.text.toString(),
                         name = binding.editTextName.text.toString(),
                         password = binding.editTextPassword.text.toString()
                     )
-                    findNavController().navigate(R.id.action_signUpFragment_to_navigation_home)
                 }
-                is Resource.Error -> {
+                is SignUpUiState.SignUpIsFailure -> {
                     binding.progressBar.gone()
-                    requireView().showSnackbar(it.message.toString())
-
+                    requireView().showSnackbar(it.value)
                 }
-                is Resource.Loading -> {
-                    binding.progressBar.visible()
+                is SignUpUiState.Loading-> {
+                    if(it.visibility) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }else {
+                        binding.progressBar.visibility = View.GONE
+                    }
                 }
             }
         }
-
     }
 }

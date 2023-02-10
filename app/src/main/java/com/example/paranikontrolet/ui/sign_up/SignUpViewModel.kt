@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.paranikontrolet.domain.usecase.AuthUseCase
 import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
-import com.example.paranikontrolet.utils.Resource
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,24 +18,45 @@ class SignUpViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _authResult = MutableLiveData<Resource<AuthResult>>()
-    val authResult: LiveData<Resource<AuthResult>> = _authResult
+    private val _authResult = MutableLiveData<SignUpUiState>()
+    val authResult: LiveData<SignUpUiState> = _authResult
 
-    fun signInWithEmailAndPassword(
+
+   fun signInWithEmailAndPassword(
         email: String?,
         name: String?,
         password: String?,
         verifyPassword: String?
     ) {
-        viewModelScope.launch() {
-            val result = authUseCase.signUpUseCase(
-                email = email,
-                name = name,
-                password = password,
-                verifyPassword = verifyPassword
-            )
-            _authResult.value = result
-        }
+       if (
+           !email.isNullOrBlank() &&
+           !name.isNullOrBlank() &&
+           !password.isNullOrBlank() &&
+           !verifyPassword.isNullOrBlank() &&
+           password == verifyPassword
+       ) {
+
+           viewModelScope.launch {
+               _authResult.value = SignUpUiState.Loading(true)
+               authUseCase.signUpUseCase(email,password).addOnCompleteListener {task ->
+                   if (task.isSuccessful) {
+                       viewModelScope.launch {
+                        authUseCase.getCurrentUserInfoUseCase()?.sendEmailVerification()
+                            ?.addOnSuccessListener {
+                                _authResult.value = SignUpUiState
+                                    .SendEmailIsSuccess("Please check your e-mail")
+                            }?.addOnFailureListener {
+                                _authResult.value = SignUpUiState.SendEmailIsFailure("Please try again later")
+                            }
+                       }
+                       _authResult.value = SignUpUiState.Loading(false)
+                       _authResult.value = SignUpUiState.SignUpIsSuccess(task.result)
+                   }
+               }.addOnFailureListener {
+                   _authResult.value = SignUpUiState.SignUpIsFailure(it.message.toString())
+               }
+           }
+       }
     }
 
     fun saveUser(
@@ -55,4 +75,12 @@ class SignUpViewModel @Inject constructor(
         }
 
     }
+}
+
+sealed class SignUpUiState {
+    data class SendEmailIsSuccess(val value: String): SignUpUiState()
+    data class SendEmailIsFailure(val value: String): SignUpUiState()
+    data class SignUpIsSuccess(val result: AuthResult): SignUpUiState()
+    data class SignUpIsFailure(val value: String): SignUpUiState()
+    data class Loading(val visibility: Boolean): SignUpUiState()
 }

@@ -60,9 +60,6 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
-        <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/navigation_sign_in" />
     </fragment>
