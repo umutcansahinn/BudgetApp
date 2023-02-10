@@ -40,7 +40,8 @@ class SplashFragment : BaseFragment() {
 
     private fun observeEvent() {
         viewModel.isCurrentUserExist.observe(viewLifecycleOwner) {
-            if (it) {
+
+            if (it != null && it.isEmailVerified) {
                 findNavController().navigate(R.id.action_splashFragment_to_navigation_home)
             } else {
                 findNavController().navigate(R.id.action_splashFragment_to_signInFragment)

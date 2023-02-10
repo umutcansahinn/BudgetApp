@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.paranikontrolet.domain.usecase.AuthUseCase
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,8 +16,8 @@ class SplashViewModel @Inject constructor(
     private val authUseCase: AuthUseCase
 ): ViewModel() {
 
-    private val _isCurrentUserExist = MutableLiveData<Boolean>()
-    val isCurrentUserExist: LiveData<Boolean> = _isCurrentUserExist
+    private val _isCurrentUserExist = MutableLiveData<FirebaseUser?>()
+    val isCurrentUserExist: LiveData<FirebaseUser?> = _isCurrentUserExist
 
     init {
         getCurrent()
@@ -24,7 +25,7 @@ class SplashViewModel @Inject constructor(
     fun getCurrent() {
         viewModelScope.launch(Dispatchers.Main) {
             delay(2000)
-            _isCurrentUserExist.value = authUseCase.getCurrentUserUseCase()
+            _isCurrentUserExist.value = authUseCase.getCurrentUserInfoUseCase()
         }
     }
 }
