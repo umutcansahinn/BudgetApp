@@ -8,9 +8,9 @@ import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.domain.usecase.AuthUseCase
 import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.*
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestoreUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudgetUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUserUseCase
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestore
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudget
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -50,12 +50,12 @@ object AppModule {
     @Singleton
     fun provideFirebaseAuthUseCases(auth: FirebaseAuthenticator): AuthUseCase {
         return AuthUseCase(
-            getCurrentUserUseCase = GetCurrentUserUseCase(auth = auth),
-            signInUseCase = SignInUseCase(auth = auth),
-            signOutUseCase = SignOutUseCase(auth = auth),
-            signUpUseCase = SignUpUseCase(auth = auth),
-            getCurrentUserInfoUseCase = GetCurrentUserInfoUseCase(auth = auth),
-            forgotPasswordUseCase = ForgotPasswordUseCase(auth = auth)
+            getCurrentUser = GetCurrentUser(auth = auth),
+            signIn = SignIn(auth = auth),
+            signOut = SignOut(auth = auth),
+            signUp = SignUp(auth = auth),
+            getCurrentUserInfo = GetCurrentUserInfo(auth = auth),
+            forgotPassword = ForgotPassword(auth = auth)
         )
     }
     @Provides
@@ -72,12 +72,12 @@ object AppModule {
     ): FirestoreUseCase {
 
         return FirestoreUseCase(
-            getBudgetFromFirestoreUseCase = GetBudgetFromFirestoreUseCase(
+            getBudgetFromFirestore = GetBudgetFromFirestore(
                 firestore = firestore,
                 mapper = mapper
             ) ,
-            saveBudgetUseCase = SaveBudgetUseCase(firestore = firestore),
-            saveUserUseCase = SaveUserUseCase(firestore = firestore)
+            saveBudget = SaveBudget(firestore = firestore),
+            saveUser = SaveUser(firestore = firestore)
         )
     }
 

@@ -25,7 +25,7 @@ class SplashViewModel @Inject constructor(
     fun getCurrent() {
         viewModelScope.launch(Dispatchers.Main) {
             delay(2000)
-            _isCurrentUserExist.value = authUseCase.getCurrentUserInfoUseCase()
+            _isCurrentUserExist.value = authUseCase.getCurrentUserInfo()
         }
     }
 }

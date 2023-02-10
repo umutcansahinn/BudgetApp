@@ -20,7 +20,7 @@ class ForgotPasswordViewModel @Inject constructor(
 
     fun forgotPassword(email: String) {
         viewModelScope.launch {
-            authUseCase.forgotPasswordUseCase(email = email).addOnSuccessListener {
+            authUseCase.forgotPassword(email = email).addOnSuccessListener {
                 _forgotPassword.value =
                     ForgotPasswordState.PasswordSuccess("Password reset mail sent, please check your mail!")
             }.addOnFailureListener {

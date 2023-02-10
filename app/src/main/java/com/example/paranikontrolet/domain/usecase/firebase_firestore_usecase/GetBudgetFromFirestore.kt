@@ -10,7 +10,7 @@ import java.util.Date
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class GetBudgetFromFirestoreUseCase @Inject constructor(
+class GetBudgetFromFirestore @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase,
     private val mapper: BudgetMapper
 ) {

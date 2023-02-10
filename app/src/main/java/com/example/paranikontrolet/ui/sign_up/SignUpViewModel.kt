@@ -38,10 +38,10 @@ class SignUpViewModel @Inject constructor(
 
            viewModelScope.launch {
                _authResult.value = SignUpUiState.Loading(true)
-               authUseCase.signUpUseCase(email,password).addOnCompleteListener {task ->
+               authUseCase.signUp(email,password).addOnCompleteListener { task ->
                    if (task.isSuccessful) {
                        viewModelScope.launch {
-                        authUseCase.getCurrentUserInfoUseCase()?.sendEmailVerification()
+                        authUseCase.getCurrentUserInfo()?.sendEmailVerification()
                             ?.addOnSuccessListener {
                                 _authResult.value = SignUpUiState
                                     .SendEmailIsSuccess("Please check your e-mail")
@@ -66,7 +66,7 @@ class SignUpViewModel @Inject constructor(
         password: String
     ) {
         viewModelScope.launch {
-            firestoreUseCase.saveUserUseCase(
+            firestoreUseCase.saveUser(
                 getFirebaseUserUid = getFirebaseUserUid,
                 email = email,
                 name = name,

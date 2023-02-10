@@ -5,7 +5,7 @@ import com.example.paranikontrolet.utils.Constants
 import java.util.*
 import javax.inject.Inject
 
-class SaveBudgetUseCase @Inject constructor(
+class SaveBudget @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
 ) {
 

@@ -23,8 +23,8 @@ class ChartViewModel @Inject constructor(
 
     fun getBudgetFromFirestore() {
         viewModelScope.launch {
-            val userId = authUseCase.getCurrentUserInfoUseCase()
-            _result.value = firestoreUseCase.getBudgetFromFirestoreUseCase(userId!!.uid)
+            val userId = authUseCase.getCurrentUserInfo()
+            _result.value = firestoreUseCase.getBudgetFromFirestore(userId!!.uid)
         }
     }
 

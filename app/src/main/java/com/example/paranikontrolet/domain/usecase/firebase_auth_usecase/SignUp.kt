@@ -5,13 +5,10 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import javax.inject.Inject
 
-class SignInUseCase @Inject constructor(
+class SignUp @Inject constructor(
     private val auth: FirebaseAuthenticator
 ) {
-    suspend operator fun invoke(
-        email: String,
-        password: String
-    ): Task<AuthResult> {
-        return auth.signInWithEmailAndPassword(email = email, password = password)
+    suspend operator fun invoke(email: String,password: String): Task<AuthResult> {
+        return auth.createUserWithEmailAndPassword(email = email, password = password)
     }
 }

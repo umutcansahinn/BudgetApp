@@ -17,8 +17,8 @@ class AddBudgetViewModel @Inject constructor(
 
     fun addBudget(amount: Float?,isIncome: Boolean?,type: String?,date: Date?) {
         viewModelScope.launch {
-            val currentUser = authUseCase.getCurrentUserInfoUseCase()
-            firestoreUseCase.saveBudgetUseCase(
+            val currentUser = authUseCase.getCurrentUserInfo()
+            firestoreUseCase.saveBudget(
                 amount = amount,
                 isIncome = isIncome,
                 type = type,

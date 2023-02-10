@@ -3,7 +3,7 @@ package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import javax.inject.Inject
 
-class SaveUserUseCase @Inject constructor(
+class SaveUser @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
 ) {
 

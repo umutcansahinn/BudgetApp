@@ -1,11 +1,11 @@
 package com.example.paranikontrolet.domain.usecase
 
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestoreUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudgetUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUserUseCase
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestore
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudget
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUser
 
 data class FirestoreUseCase(
-    val getBudgetFromFirestoreUseCase: GetBudgetFromFirestoreUseCase,
-    val saveBudgetUseCase: SaveBudgetUseCase,
-    val saveUserUseCase: SaveUserUseCase
+    val getBudgetFromFirestore: GetBudgetFromFirestore,
+    val saveBudget: SaveBudget,
+    val saveUser: SaveUser
 )

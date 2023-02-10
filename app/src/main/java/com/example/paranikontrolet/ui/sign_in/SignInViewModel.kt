@@ -26,10 +26,10 @@ class SignInViewModel @Inject constructor(
         ) {
             viewModelScope.launch {
                 _authResult.value = SignInUiState.Loading(true)
-                authUseCase.signInUseCase(email,password).addOnCompleteListener { task->
+                authUseCase.signIn(email,password).addOnCompleteListener { task->
                     if (task.isSuccessful) {
                         viewModelScope.launch{
-                           val verification =  authUseCase.getCurrentUserInfoUseCase()?.isEmailVerified
+                           val verification =  authUseCase.getCurrentUserInfo()?.isEmailVerified
                             verification?.let {
                                 if (it) {
                                     _authResult.value = SignInUiState.Loading(false)
