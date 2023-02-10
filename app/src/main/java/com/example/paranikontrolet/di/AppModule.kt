@@ -54,7 +54,8 @@ object AppModule {
             signInUseCase = SignInUseCase(auth = auth),
             signOutUseCase = SignOutUseCase(auth = auth),
             signUpUseCase = SignUpUseCase(auth = auth),
-            getCurrentUserInfoUseCase = GetCurrentUserInfoUseCase(auth = auth)
+            getCurrentUserInfoUseCase = GetCurrentUserInfoUseCase(auth = auth),
+            forgotPasswordUseCase = ForgotPasswordUseCase(auth = auth)
         )
     }
     @Provides

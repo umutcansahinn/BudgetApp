@@ -36,4 +36,9 @@ class FirebaseAuthenticatorImpl @Inject constructor(
         return auth.currentUser
     }
 
+    override suspend fun forgotPassword(email: String): Task<Void> {
+        return auth.sendPasswordResetEmail(email)
+    }
+
+
 }

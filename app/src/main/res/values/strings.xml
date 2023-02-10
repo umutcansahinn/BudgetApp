@@ -10,7 +10,7 @@
     <string name="sign_in">SIGN IN</string>
     <string name="email">email</string>
     <string name="password">password</string>
-    <string name="forgot_password">forgot password</string>
+    <string name="forgot_password">forgot password?</string>
     <string name="name">name</string>
     <string name="verify_password">Verify Password</string>
     <string name="sign_up">sign up</string>

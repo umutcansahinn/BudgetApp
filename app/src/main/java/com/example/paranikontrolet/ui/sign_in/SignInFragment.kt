@@ -10,10 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentSignInBinding
 import com.example.paranikontrolet.ui.base.BaseFragment
-import com.example.paranikontrolet.utils.Resource
-import com.example.paranikontrolet.utils.gone
-import com.example.paranikontrolet.utils.showSnackbar
-import com.example.paranikontrolet.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,20 +54,6 @@ class SignInFragment : BaseFragment() {
 
                }
            }
-
-        /* when(it) {
-                is Resource.Success -> {
-                    binding.progressBar.gone()
-                    findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
-                }
-                is Resource.Error -> {
-                    binding.progressBar.gone()
-                    requireView().showSnackbar(it.message.toString())
-                }
-                is Resource.Loading -> {
-                    binding.progressBar.visible()
-                }
-            }*/
         }
     }
 
@@ -85,6 +67,10 @@ class SignInFragment : BaseFragment() {
             }
             textViewSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+            }
+
+            textViewForgotPassword.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_sign_in_to_forgotPassword)
             }
         }
         bottomNavigationViewVisibility = View.GONE

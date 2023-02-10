@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/navigation_sign_up" />
+        <action
+            android:id="@+id/action_navigation_sign_in_to_forgotPassword"
+            app:destination="@id/forgotPassword" />
     </fragment>
     <fragment
         android:id="@+id/navigation_sign_up"
@@ -73,4 +76,13 @@
         android:name="com.example.paranikontrolet.ui.chart.ChartFragment"
         android:label="@string/title_chart"
         tools:layout="@layout/fragment_chart" />
+    <fragment
+        android:id="@+id/forgotPassword"
+        android:name="com.example.paranikontrolet.ui.forgot_password.ForgotPasswordFragment"
+        android:label="Forgot Password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPassword_to_navigation_sign_in"
+            app:destination="@id/navigation_sign_in" />
+    </fragment>
 </navigation>

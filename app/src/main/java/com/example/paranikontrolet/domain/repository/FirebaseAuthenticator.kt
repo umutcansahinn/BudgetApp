@@ -21,4 +21,6 @@ interface FirebaseAuthenticator {
     suspend fun getCurrentUser(): Boolean
 
     suspend fun getCurrentUserInfo(): FirebaseUser?
+
+    suspend fun forgotPassword(email: String): Task<Void>
 }
