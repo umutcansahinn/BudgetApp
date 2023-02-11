@@ -25,7 +25,8 @@ class GetBudgetFromFirestore @Inject constructor(
                     amount = it.get(Constants.AMOUNT).toString().toFloat(),
                     isIncome = it.get(Constants.IS_INCOME).toString().toBoolean(),
                     type = it.get(Constants.TYPE).toString(),
-                    date = Date(it.get(Constants.DATE).toString().toLong())
+                    date = Date(it.get(Constants.DATE).toString().toLong()),
+                    id = it.id
                 ).run {
                     mapper.map(this)
                 }

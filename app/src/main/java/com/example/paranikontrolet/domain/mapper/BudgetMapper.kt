@@ -20,7 +20,8 @@ class BudgetMapper {
         textColor = getTextColor(),
         strokeColor = getStrokeColor(),
         chartColor = getChartColor(),
-        cardColor = getCardColor()
+        cardColor = getCardColor(),
+        id = id
     )
 
     private fun Budget.getAmount() = amount

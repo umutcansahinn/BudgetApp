@@ -11,6 +11,7 @@ data class BudgetUiModel(
     val textColor: Int,
     val strokeColor: Int,
     val chartColor: String,
-    val cardColor: String
+    val cardColor: String,
+    val id: String?
 
 )
