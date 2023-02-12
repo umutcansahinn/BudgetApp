@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.ui.add_budget
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,9 +67,24 @@ class AddBudgetFragment : BaseFragment() {
             when (it) {
                 is DeleteBudgetState.OnSuccess -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
                 }
                 is DeleteBudgetState.OnFailure -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        viewModel.updateBudget.observe(viewLifecycleOwner) {
+            when (it) {
+                is UpdateBudgetState.OnSuccess -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                }
+                is UpdateBudgetState.OnFailure -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is UpdateBudgetState.NullData -> {
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -78,8 +94,9 @@ class AddBudgetFragment : BaseFragment() {
     private fun initViews() {
         if (!isHomePage) {
             deleteOrUpdateBudget()
+        } else {
+            addBudget()
         }
-        addBudget()
 
         bottomNavigationViewVisibility = View.GONE
         toolbarVisibility = true
@@ -87,53 +104,9 @@ class AddBudgetFragment : BaseFragment() {
 
     private fun addBudget() {
 
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.chipIncome -> type = binding.chipIncome.text.toString()
-                R.id.chipRent -> type = binding.chipRent.text.toString()
-                R.id.chipCar -> type = binding.chipCar.text.toString()
-                R.id.chipElectric -> type = binding.chipElectric.text.toString()
-                R.id.chipWater -> type = binding.chipWater.text.toString()
-                R.id.chipFire -> type = binding.chipFire.text.toString()
-                R.id.chipInternet -> type = binding.chipInternet.text.toString()
-                R.id.chipPhone -> type = binding.chipPhone.text.toString()
-                R.id.chipMarket -> type = binding.chipMarket.text.toString()
-                R.id.chipClothes -> type = binding.chipClothes.text.toString()
-                R.id.chipEducation -> type = binding.chipEducation.text.toString()
-                R.id.chipOthers -> type = binding.chipOthers.text.toString()
-            }
-        }
-
-        binding.switchIncome.setOnClickListener {
-            binding.switchExpense.isChecked = !binding.switchExpense.isChecked
-        }
-        binding.switchExpense.setOnClickListener {
-            binding.switchIncome.isChecked = !binding.switchIncome.isChecked
-        }
-
-        binding.buttonCalender.setOnClickListener {
-            val datePicker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText(getString(R.string.select_date_button))
-                    .setSelection(selectedDate?.time)
-                    .build()
-            datePicker.addOnPositiveButtonClickListener { timestamp ->
-                val selectedUtc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-                selectedUtc.timeInMillis = timestamp
-                val selectedLocal = Calendar.getInstance()
-                selectedLocal.clear()
-                selectedLocal.set(
-                    selectedUtc.get(Calendar.YEAR),
-                    selectedUtc.get(Calendar.MONTH),
-                    selectedUtc.get(Calendar.DATE)
-                )
-                selectedDate = selectedLocal.time
-                binding.buttonCalender.text =
-                    selectedLocal.time.toFormat(Constants.CURRENT_DATE_FORMAT)
-            }
-            datePicker.show(parentFragmentManager, Constants.TAG_DATE_PICKER)
-        }
-
+        chipItems()
+        switchItems()
+        calendarItem()
 
         binding.buttonSave.setOnClickListener {
 
@@ -177,9 +150,76 @@ class AddBudgetFragment : BaseFragment() {
 
         binding.buttonDelete.setOnClickListener {
             viewModel.deleteBudget(documentId = argsDocumentId!!)
-            findNavController().popBackStack()
         }
 
+
+        chipItems()
+        switchItems()
+        calendarItem()
+
+        binding.buttonUpdate.setOnClickListener {
+            viewModel.updateBudget(
+                amount = binding.editTextAmount.text.toString().toFloat(),
+                isIncome = binding.switchIncome.isChecked,
+                type = type,
+                date = selectedDate,
+                documentId = argsDocumentId
+            )
+        }
+    }
+
+    private fun chipItems() {
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.chipIncome -> type = binding.chipIncome.text.toString()
+                R.id.chipRent -> type = binding.chipRent.text.toString()
+                R.id.chipCar -> type = binding.chipCar.text.toString()
+                R.id.chipElectric -> type = binding.chipElectric.text.toString()
+                R.id.chipWater -> type = binding.chipWater.text.toString()
+                R.id.chipFire -> type = binding.chipFire.text.toString()
+                R.id.chipInternet -> type = binding.chipInternet.text.toString()
+                R.id.chipPhone -> type = binding.chipPhone.text.toString()
+                R.id.chipMarket -> type = binding.chipMarket.text.toString()
+                R.id.chipClothes -> type = binding.chipClothes.text.toString()
+                R.id.chipEducation -> type = binding.chipEducation.text.toString()
+                R.id.chipOthers -> type = binding.chipOthers.text.toString()
+            }
+        }
+    }
+
+    private fun switchItems() {
+        binding.switchIncome.setOnClickListener {
+            binding.switchExpense.isChecked = !binding.switchExpense.isChecked
+        }
+        binding.switchExpense.setOnClickListener {
+            binding.switchIncome.isChecked = !binding.switchIncome.isChecked
+        }
+    }
+
+    private fun calendarItem() {
+
+        binding.buttonCalender.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText(getString(R.string.select_date_button))
+                    .setSelection(selectedDate?.time)
+                    .build()
+            datePicker.addOnPositiveButtonClickListener { timestamp ->
+                val selectedUtc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                selectedUtc.timeInMillis = timestamp
+                val selectedLocal = Calendar.getInstance()
+                selectedLocal.clear()
+                selectedLocal.set(
+                    selectedUtc.get(Calendar.YEAR),
+                    selectedUtc.get(Calendar.MONTH),
+                    selectedUtc.get(Calendar.DATE)
+                )
+                selectedDate = selectedLocal.time
+                binding.buttonCalender.text =
+                    selectedLocal.time.toFormat(Constants.CURRENT_DATE_FORMAT)
+            }
+            datePicker.show(parentFragmentManager, Constants.TAG_DATE_PICKER)
+        }
     }
 
 

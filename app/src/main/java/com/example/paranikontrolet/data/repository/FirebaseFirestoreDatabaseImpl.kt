@@ -42,4 +42,8 @@ class FirebaseFirestoreDatabaseImpl @Inject constructor(
     override suspend fun deleteBudget(documentId: String): Task<Void> {
        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId).delete()
     }
+
+    override suspend fun updateBudget(hashMap: HashMap<String, Any>,documentId: String): Task<Void> {
+        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId).update(hashMap)
+    }
 }

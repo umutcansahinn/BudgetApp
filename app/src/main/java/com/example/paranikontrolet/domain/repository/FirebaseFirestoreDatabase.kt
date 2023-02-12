@@ -19,5 +19,6 @@ interface FirebaseFirestoreDatabase {
     suspend fun getBudgetDocuments(userId: String): QuerySnapshot
 
     suspend fun deleteBudget(documentId: String): Task<Void>
+    suspend fun updateBudget(hashMap: HashMap<String,Any>,documentId: String): Task<Void>
 
 }
