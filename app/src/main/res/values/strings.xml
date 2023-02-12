@@ -48,5 +48,7 @@
     <string name="text_view_date">12/12/1212</string>
     <string name="text_view_amount">250</string>
     <string name="text_view_type">income</string>
+    <string name="delete">delete</string>
+    <string name="update">update</string>
 
 </resources>

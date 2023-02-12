@@ -1,17 +1,22 @@
 package com.example.paranikontrolet.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentHomeBinding
+import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.ui.base.BaseFragment
 import com.example.paranikontrolet.ui.home.adapter.BudgetListAdapter
 import com.example.paranikontrolet.utils.Resource
+import com.example.paranikontrolet.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,7 +82,6 @@ class HomeFragment : BaseFragment() {
                     }
                 }
             }
-
         }
     }
 
@@ -90,7 +94,29 @@ class HomeFragment : BaseFragment() {
         toolbarVisibility = true
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_addCashFlowFragment)
+            val action = HomeFragmentDirections.actionNavigationHomeToAddCashFlowFragment(
+                isHomePage = true,
+                type = null,
+                amount = null,
+                isIncome = null,
+                date = null,
+                documentId = null
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
+
+
+        budgetListAdapter.onDeleteClick = { type,amount,isIncome,date,documentId->
+
+            val action = HomeFragmentDirections.actionNavigationHomeToAddCashFlowFragment(
+                isHomePage = false,
+                type =type ,
+                amount = amount,
+                isIncome = isIncome,
+                date = date,
+                documentId = documentId
+            )
+            Navigation.findNavController(requireView()).navigate(action)
         }
     }
 

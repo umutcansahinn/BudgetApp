@@ -5,14 +5,17 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.Constants
 import com.example.paranikontrolet.utils.toFormat
+import java.util.Date
 
 class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
 
     val budgetList = ArrayList<BudgetUiModel>()
+    var onDeleteClick: ((type:String,amount: String,isIncome:String,date: String,documentId: String) -> Unit)? = null
 
     class ViewHolder(val binding: ItemHomeRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -38,6 +41,15 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
         holder.binding.cardView.setCardBackgroundColor(Color.parseColor(budgetList[position].cardColor))
 
+        holder.binding.imageButton.setOnClickListener {
+            onDeleteClick?.invoke(
+                budgetList[position].type,
+                budgetList[position].amount.toString(),
+                budgetList[position].isIncome.toString(),
+                budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT),
+                budgetList[position].id!!
+            )
+        }
     }
 
     fun updateList(newToDoList: List<BudgetUiModel>) {

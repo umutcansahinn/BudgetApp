@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
@@ -28,6 +29,13 @@ class AddBudgetFragment : BaseFragment() {
     private var type: String? = null
     private var selectedDate: Date? = null
 
+    private var isHomePage: Boolean = true
+    private var argsType: String? = null
+    private var argsAmount: String? = null
+    private var argsIsIncome: String? = null
+    private var argsDate: String? = null
+    private var argsDocumentId: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,11 +49,43 @@ class AddBudgetFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            isHomePage = AddBudgetFragmentArgs.fromBundle(it).isHomePage
+            argsType = AddBudgetFragmentArgs.fromBundle(it).type
+            argsAmount = AddBudgetFragmentArgs.fromBundle(it).amount
+            argsIsIncome = AddBudgetFragmentArgs.fromBundle(it).isIncome
+            argsDate = AddBudgetFragmentArgs.fromBundle(it).date
+            argsDocumentId = AddBudgetFragmentArgs.fromBundle(it).documentId
+        }
         initViews()
+        observeEvents()
+    }
+
+    private fun observeEvents() {
+        viewModel.deleteBudget.observe(viewLifecycleOwner) {
+            when (it) {
+                is DeleteBudgetState.OnSuccess -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is DeleteBudgetState.OnFailure -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 
     private fun initViews() {
+        if (!isHomePage) {
+            deleteOrUpdateBudget()
+        }
+        addBudget()
+
+        bottomNavigationViewVisibility = View.GONE
+        toolbarVisibility = true
+    }
+
+    private fun addBudget() {
 
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -108,14 +148,59 @@ class AddBudgetFragment : BaseFragment() {
             )
             findNavController().popBackStack()
         }
-
-        bottomNavigationViewVisibility = View.GONE
-        toolbarVisibility = true
     }
+
+    private fun deleteOrUpdateBudget() {
+
+        when (argsType) {
+            Type.INCOME.type -> binding.chipIncome.isChecked = true
+            Type.RENT.type -> binding.chipRent.isChecked = true
+            Type.CAR.type -> binding.chipCar.isChecked = true
+            Type.ELECTRIC.type -> binding.chipElectric.isChecked = true
+            Type.WATER.type -> binding.chipWater.isChecked = true
+            Type.GAS.type -> binding.chipFire.isChecked = true
+            Type.INTERNET.type -> binding.chipInternet.isChecked = true
+            Type.PHONE.type -> binding.chipPhone.isChecked = true
+            Type.MARKET.type -> binding.chipMarket.isChecked = true
+            Type.CLOTHES.type -> binding.chipClothes.isChecked = true
+            Type.EDUCATION.type -> binding.chipEducation.isChecked = true
+            else -> binding.chipOthers.isChecked = true
+        }
+
+        binding.editTextAmount.setText(argsAmount)
+        binding.switchIncome.isChecked = argsIsIncome.toBoolean()
+        binding.switchExpense.isChecked = !argsIsIncome.toBoolean()
+        binding.buttonCalender.text = argsDate
+        binding.buttonSave.visibility = View.GONE
+        binding.buttonDelete.visibility = View.VISIBLE
+        binding.buttonUpdate.visibility = View.VISIBLE
+
+        binding.buttonDelete.setOnClickListener {
+            viewModel.deleteBudget(documentId = argsDocumentId!!)
+            findNavController().popBackStack()
+        }
+
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+}
+
+enum class Type(val type: String) {
+    INCOME("income"),
+    RENT("rent"),
+    CAR("car"),
+    ELECTRIC("electric"),
+    WATER("water"),
+    GAS("gas"),
+    INTERNET("internet"),
+    PHONE("phone"),
+    MARKET("market"),
+    CLOTHES("clothes"),
+    EDUCATION("education"),
+    OTHERS("others")
 }

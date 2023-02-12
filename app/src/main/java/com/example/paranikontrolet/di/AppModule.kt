@@ -8,6 +8,7 @@ import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.domain.usecase.AuthUseCase
 import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
 import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.*
+import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.DeleteBudget
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.GetBudgetFromFirestore
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveBudget
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.SaveUser
@@ -77,7 +78,8 @@ object AppModule {
                 mapper = mapper
             ) ,
             saveBudget = SaveBudget(firestore = firestore),
-            saveUser = SaveUser(firestore = firestore)
+            saveUser = SaveUser(firestore = firestore),
+            deleteBudget = DeleteBudget(firestore = firestore)
         )
     }
 

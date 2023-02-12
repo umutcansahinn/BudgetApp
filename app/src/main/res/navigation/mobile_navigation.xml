@@ -70,7 +70,32 @@
         android:id="@+id/navigation_add_budget"
         android:name="com.example.paranikontrolet.ui.add_budget.AddBudgetFragment"
         android:label="@string/title_add_budget"
-        tools:layout="@layout/fragment_add_budget" />
+        tools:layout="@layout/fragment_add_budget" >
+        <argument
+            android:name="isHomePage"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="amount"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="isIncome"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="date"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="documentId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_chart"
         android:name="com.example.paranikontrolet.ui.chart.ChartFragment"
