@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
+import com.example.paranikontrolet.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ForgotPasswordViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase
+    private val useCases: UseCases
 ): ViewModel() {
 
 
@@ -20,7 +20,7 @@ class ForgotPasswordViewModel @Inject constructor(
 
     fun forgotPassword(email: String) {
         viewModelScope.launch {
-            authUseCase.forgotPassword(email = email).addOnSuccessListener {
+            useCases.forgotPassword(email = email).addOnSuccessListener {
                 _forgotPassword.value =
                     ForgotPasswordState.PasswordSuccess("Password reset mail sent, please check your mail!")
             }.addOnFailureListener {

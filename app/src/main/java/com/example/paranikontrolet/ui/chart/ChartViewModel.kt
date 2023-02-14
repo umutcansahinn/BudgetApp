@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
-import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
+import com.example.paranikontrolet.domain.usecase.UseCases
 import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChartViewModel @Inject constructor(
-    private val firestoreUseCase: FirestoreUseCase,
-    private val authUseCase: AuthUseCase
+    private val useCases: UseCases
 ) : ViewModel() {
 
     private val _result = MutableLiveData<Resource<List<BudgetUiModel>>>()
@@ -23,8 +21,8 @@ class ChartViewModel @Inject constructor(
 
     fun getBudgetFromFirestore() {
         viewModelScope.launch {
-            val userId = authUseCase.getCurrentUserInfo()
-            _result.value = firestoreUseCase.getBudgetFromFirestore(userId!!.uid)
+            val userId = useCases.getCurrentUserInfo()
+            _result.value = useCases.getBudgetFromFirestore(userId!!.uid)
         }
     }
 

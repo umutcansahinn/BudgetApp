@@ -1,7 +1,6 @@
 package com.example.paranikontrolet.ui.add_budget
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentAddBudgetBinding
-import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.Constants
 import com.example.paranikontrolet.utils.toFormat
 import com.google.android.material.datepicker.MaterialDatePicker

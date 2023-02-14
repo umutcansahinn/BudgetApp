@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
+import com.example.paranikontrolet.domain.usecase.UseCases
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase
+    private val useCases: UseCases
 ) : ViewModel() {
 
     private val _authResult = MutableLiveData<SignInUiState>()
@@ -26,10 +26,10 @@ class SignInViewModel @Inject constructor(
         ) {
             viewModelScope.launch {
                 _authResult.value = SignInUiState.Loading(true)
-                authUseCase.signIn(email,password).addOnCompleteListener { task->
+                useCases.signIn(email,password).addOnCompleteListener { task->
                     if (task.isSuccessful) {
                         viewModelScope.launch{
-                           val verification =  authUseCase.getCurrentUserInfo()?.isEmailVerified
+                           val verification =  useCases.getCurrentUserInfo()?.isEmailVerified
                             verification?.let {
                                 if (it) {
                                     _authResult.value = SignInUiState.Loading(false)

@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
-import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
+import com.example.paranikontrolet.domain.usecase.UseCases
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,8 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase,
-    private val firestoreUseCase: FirestoreUseCase
+    private val useCases: UseCases,
 ) : ViewModel() {
 
 
@@ -38,10 +36,10 @@ class SignUpViewModel @Inject constructor(
 
            viewModelScope.launch {
                _authResult.value = SignUpUiState.Loading(true)
-               authUseCase.signUp(email,password).addOnCompleteListener { task ->
+               useCases.signUp(email,password).addOnCompleteListener { task ->
                    if (task.isSuccessful) {
                        viewModelScope.launch {
-                        authUseCase.getCurrentUserInfo()?.sendEmailVerification()
+                        useCases.getCurrentUserInfo()?.sendEmailVerification()
                             ?.addOnSuccessListener {
                                 _authResult.value = SignUpUiState
                                     .SendEmailIsSuccess("Please check your e-mail")
@@ -66,7 +64,7 @@ class SignUpViewModel @Inject constructor(
         password: String
     ) {
         viewModelScope.launch {
-            firestoreUseCase.saveUser(
+            useCases.saveUser(
                 getFirebaseUserUid = getFirebaseUserUid,
                 email = email,
                 name = name,

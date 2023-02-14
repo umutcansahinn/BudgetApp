@@ -5,8 +5,7 @@ import com.example.paranikontrolet.data.repository.FirebaseFirestoreDatabaseImpl
 import com.example.paranikontrolet.domain.mapper.BudgetMapper
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
-import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
+import com.example.paranikontrolet.domain.usecase.UseCases
 import com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.*
 import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.*
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +27,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirebaseUser() = Firebase.auth
+
     @Provides
     @Singleton
     fun provideFirebaseFirestore() = Firebase.firestore
@@ -46,34 +46,22 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseAuthUseCases(auth: FirebaseAuthenticator): AuthUseCase {
-        return AuthUseCase(
+    fun provideUseCases(
+        auth: FirebaseAuthenticator,
+        firestore: FirebaseFirestoreDatabase,
+        mapper: BudgetMapper
+    ): UseCases {
+        return UseCases(
             getCurrentUser = GetCurrentUser(auth = auth),
             signIn = SignIn(auth = auth),
             signOut = SignOut(auth = auth),
             signUp = SignUp(auth = auth),
             getCurrentUserInfo = GetCurrentUserInfo(auth = auth),
-            forgotPassword = ForgotPassword(auth = auth)
-        )
-    }
-    @Provides
-    @Singleton
-    fun provideBudgetMapper(): BudgetMapper {
-        return BudgetMapper()
-    }
-
-    @Provides
-    @Singleton
-    fun provideFirebaseFirestoreUseCases(
-        firestore: FirebaseFirestoreDatabase,
-        mapper: BudgetMapper
-    ): FirestoreUseCase {
-
-        return FirestoreUseCase(
+            forgotPassword = ForgotPassword(auth = auth),
             getBudgetFromFirestore = GetBudgetFromFirestore(
                 firestore = firestore,
                 mapper = mapper
-            ) ,
+            ),
             saveBudget = SaveBudget(firestore = firestore),
             saveUser = SaveUser(firestore = firestore),
             deleteBudget = DeleteBudget(firestore = firestore),
@@ -81,5 +69,9 @@ object AppModule {
         )
     }
 
-
+    @Provides
+    @Singleton
+    fun provideBudgetMapper(): BudgetMapper {
+        return BudgetMapper()
+    }
 }

@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentSignUpBinding
-import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 

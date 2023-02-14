@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentChartBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
-import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.Resource
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis

@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.paranikontrolet.domain.usecase.AuthUseCase
-import com.example.paranikontrolet.domain.usecase.FirestoreUseCase
-import com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.UpdateBudget
+import com.example.paranikontrolet.domain.usecase.UseCases
 import com.example.paranikontrolet.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddBudgetViewModel @Inject constructor(
-    private val firestoreUseCase: FirestoreUseCase,
-    private val authUseCase: AuthUseCase
+    private val useCases: UseCases
 ) : ViewModel() {
 
     private val _deleteBudget = MutableLiveData<DeleteBudgetState>()
@@ -28,8 +25,8 @@ class AddBudgetViewModel @Inject constructor(
 
     fun addBudget(amount: Float?, isIncome: Boolean?, type: String?, date: Date?) {
         viewModelScope.launch {
-            val currentUser = authUseCase.getCurrentUserInfo()
-            firestoreUseCase.saveBudget(
+            val currentUser = useCases.getCurrentUserInfo()
+            useCases.saveBudget(
                 amount = amount,
                 isIncome = isIncome,
                 type = type,
@@ -41,7 +38,7 @@ class AddBudgetViewModel @Inject constructor(
 
     fun deleteBudget(documentId: String) {
         viewModelScope.launch {
-            firestoreUseCase.deleteBudget(documentId = documentId).addOnSuccessListener {
+            useCases.deleteBudget(documentId = documentId).addOnSuccessListener {
                 _deleteBudget.value = DeleteBudgetState.OnSuccess("Data Deleted!")
             }.addOnFailureListener {
                 _deleteBudget.value = DeleteBudgetState.OnFailure(it.message.toString())
@@ -57,7 +54,7 @@ class AddBudgetViewModel @Inject constructor(
         documentId: String?
     ) {
         viewModelScope.launch {
-            val currentUser = authUseCase.getCurrentUserInfo()
+            val currentUser = useCases.getCurrentUserInfo()
             if (
                 amount != null &&
                 isIncome != null &&
@@ -73,7 +70,7 @@ class AddBudgetViewModel @Inject constructor(
                     Constants.DATE to date.time,
                     Constants.USER_ID to currentUser.uid
                 )
-                firestoreUseCase.updateBudget(hashMap = hashMap, documentId = documentId)
+                useCases.updateBudget(hashMap = hashMap, documentId = documentId)
                     .addOnSuccessListener {
                         _updateBudget.value = UpdateBudgetState.OnSuccess("Data Updated")
                         Log.d("umut", "data updated")

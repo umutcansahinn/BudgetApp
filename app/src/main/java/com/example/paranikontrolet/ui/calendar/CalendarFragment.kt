@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.applandeo.materialcalendarview.EventDay
 import com.example.paranikontrolet.databinding.FragmentCalendarBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
-import com.example.paranikontrolet.ui.base.BaseFragment
+import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.ui.calendar.adapter.CalendarListAdapter
 import com.example.paranikontrolet.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint

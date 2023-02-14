@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.ui.base
+package com.example.paranikontrolet.utils
 
 import android.view.View
 import androidx.fragment.app.Fragment
