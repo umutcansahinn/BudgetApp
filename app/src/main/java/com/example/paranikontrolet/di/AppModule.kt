@@ -60,6 +60,7 @@ object AppModule {
             forgotPassword = ForgotPassword(auth = auth),
             getBudgetFromFirestore = GetBudgetFromFirestore(
                 firestore = firestore,
+                auth = auth,
                 mapper = mapper
             ),
             saveBudget = SaveBudget(firestore = firestore),

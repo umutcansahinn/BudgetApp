@@ -21,8 +21,7 @@ class CalendarViewModel @Inject constructor(
 
     fun getBudgetFromFirestore() {
         viewModelScope.launch {
-            val userId = useCases.getCurrentUserInfo()
-            _result.value = useCases.getBudgetFromFirestore(userId!!.uid)
+            _result.value = useCases.getBudgetFromFirestore()
         }
     }
 
