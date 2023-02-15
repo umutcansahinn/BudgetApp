@@ -64,26 +64,23 @@ class AddBudgetFragment : BaseFragment() {
     private fun observeEvents() {
         viewModel.deleteBudget.observe(viewLifecycleOwner) {
             when (it) {
-                is DeleteBudgetState.OnSuccess -> {
+                is BudgetState.OnSuccess -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 }
-                is DeleteBudgetState.OnFailure -> {
+                is BudgetState.OnFailure -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         }
         viewModel.updateBudget.observe(viewLifecycleOwner) {
             when (it) {
-                is UpdateBudgetState.OnSuccess -> {
+                is BudgetState.OnSuccess -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 }
-                is UpdateBudgetState.OnFailure -> {
+                is BudgetState.OnFailure -> {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                }
-                is UpdateBudgetState.NullData -> {
-                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -17,11 +17,11 @@ class AddBudgetViewModel @Inject constructor(
     private val useCases: UseCases
 ) : ViewModel() {
 
-    private val _deleteBudget = MutableLiveData<DeleteBudgetState>()
-    val deleteBudget: LiveData<DeleteBudgetState> = _deleteBudget
+    private val _deleteBudget = MutableLiveData<BudgetState>()
+    val deleteBudget: LiveData<BudgetState> = _deleteBudget
 
-    private val _updateBudget = MutableLiveData<UpdateBudgetState>()
-    val updateBudget: LiveData<UpdateBudgetState> = _updateBudget
+    private val _updateBudget = MutableLiveData<BudgetState>()
+    val updateBudget: LiveData<BudgetState> = _updateBudget
 
     fun addBudget(amount: Float?, isIncome: Boolean?, type: String?, date: Date?) {
         viewModelScope.launch {
@@ -39,9 +39,9 @@ class AddBudgetViewModel @Inject constructor(
     fun deleteBudget(documentId: String) {
         viewModelScope.launch {
             useCases.deleteBudget(documentId = documentId).addOnSuccessListener {
-                _deleteBudget.value = DeleteBudgetState.OnSuccess("Data Deleted!")
+                _deleteBudget.value = BudgetState.OnSuccess("Data Deleted!")
             }.addOnFailureListener {
-                _deleteBudget.value = DeleteBudgetState.OnFailure(it.message.toString())
+                _deleteBudget.value = BudgetState.OnFailure(it.message.toString())
             }
         }
     }
@@ -72,26 +72,15 @@ class AddBudgetViewModel @Inject constructor(
                 )
                 useCases.updateBudget(hashMap = hashMap, documentId = documentId)
                     .addOnSuccessListener {
-                        _updateBudget.value = UpdateBudgetState.OnSuccess("Data Updated")
+                        _updateBudget.value = BudgetState.OnSuccess("Data Updated")
                         Log.d("umut", "data updated")
                     }.addOnFailureListener {
-                        _updateBudget.value = UpdateBudgetState.OnFailure(it.message.toString())
+                        _updateBudget.value = BudgetState.OnFailure(it.message.toString())
                         Log.d("umut", it.message.toString())
                     }
             } else {
-                _updateBudget.value = UpdateBudgetState.NullData("Please check your data!!")
+                _updateBudget.value = BudgetState.OnFailure("Please check your data!!")
             }
         }
     }
-}
-
-sealed class DeleteBudgetState {
-    data class OnSuccess(val message: String) : DeleteBudgetState()
-    data class OnFailure(val message: String) : DeleteBudgetState()
-}
-
-sealed class UpdateBudgetState {
-    data class OnSuccess(val message: String) : UpdateBudgetState()
-    data class OnFailure(val message: String) : UpdateBudgetState()
-    data class NullData(val message: String) : UpdateBudgetState()
 }
