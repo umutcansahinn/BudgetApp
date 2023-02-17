@@ -5,8 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.chart.ChartFragment">
+
+    <LinearLayout
+        android:id="@+id/showLinearLayout"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -86,7 +97,14 @@
             app:layout_constraintBottom_toBottomOf="parent">
         </TextView>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
+    <TextView
+        android:id="@+id/textViewNullData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/please_add_data">
+    </TextView>
 </LinearLayout>

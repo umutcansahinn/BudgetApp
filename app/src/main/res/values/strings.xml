@@ -50,5 +50,6 @@
     <string name="text_view_type">income</string>
     <string name="delete">delete</string>
     <string name="update">update</string>
+    <string name="please_add_data">Please add data</string>
 
 </resources>

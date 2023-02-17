@@ -78,12 +78,16 @@ class ChartFragment : BaseFragment() {
         viewModel.result.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    it.data?.let { list ->
-                        setBarChart(list)
-                        setPieChart(list)
+                    if (it.data != null && it.data.isEmpty().not()) {
+                            setBarChart(it.data)
+                            setPieChart(it.data)
+                        binding.textViewError.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        binding.textViewNullData.visibility = View.GONE
+                    } else {
+                        binding.showLinearLayout.visibility = View.GONE
+                        binding.textViewNullData.visibility = View.VISIBLE
                     }
-                    binding.textViewError.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Error -> {
                     binding.textViewError.visibility = View.VISIBLE

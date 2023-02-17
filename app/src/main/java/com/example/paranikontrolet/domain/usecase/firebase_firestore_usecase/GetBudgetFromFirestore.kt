@@ -42,29 +42,4 @@ class GetBudgetFromFirestore @Inject constructor(
             Resource.Error(e.message.toString())
         }
     }
-
-
-    }
- /*   suspend operator fun invoke(userId: String): Resource<List<BudgetUiModel>> {
-        return try {
-            Resource.Loading(data = null)
-            val result = firestore.getBudgetDocuments(userId = userId)
-            val budgetList = ArrayList<BudgetUiModel>()
-            budgetList.clear()
-            result.forEach {
-                val budget = Budget(
-                    amount = it.get(Constants.AMOUNT).toString().toFloat(),
-                    isIncome = it.get(Constants.IS_INCOME).toString().toBoolean(),
-                    type = it.get(Constants.TYPE).toString(),
-                    date = Date(it.get(Constants.DATE).toString().toLong()),
-                    id = it.id
-                ).run {
-                    mapper.map(this)
-                }
-                budgetList.add(budget)
-            }
-            Resource.Success(budgetList)
-        } catch (e: Exception) {
-            Resource.Error(e.message.toString())
-        }
-    }*/
+}

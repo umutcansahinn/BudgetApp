@@ -33,6 +33,16 @@
 
     </TextView>
 
+    <TextView
+        android:id="@+id/textViewNullData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/please_add_data"
+        android:visibility="gone"
+        android:textSize="25sp">
+    </TextView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"

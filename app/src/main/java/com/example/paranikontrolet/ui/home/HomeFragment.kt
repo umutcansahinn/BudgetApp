@@ -44,40 +44,41 @@ class HomeFragment : BaseFragment() {
 
     private fun observeEvent() {
         viewModel.result.observe(viewLifecycleOwner) {
-            it?.let {
-                when(it) {
-                    is Resource.Success -> {
-                        if (it.data != null) {
-                            val newList = it.data.sortedWith(compareByDescending { it.date })
-                            budgetListAdapter.updateList(newList)
+            when (it) {
+                is Resource.Success -> {
+                    if (it.data != null && it.data.isEmpty().not()) {
+                        val newList = it.data.sortedWith(compareByDescending { it.date })
+                        budgetListAdapter.updateList(newList)
 
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.progressBar.visibility = View.GONE
-                            binding.textViewError.visibility = View.GONE
-                        }else {
-                            binding.recyclerView.visibility = View.GONE
-                            binding.progressBar.visibility = View.VISIBLE
-                            binding.textViewError.visibility = View.GONE
-                        }
-
-                    }
-                    is Resource.Error -> {
-                        binding.textViewError.text = it.message.toString()
-
-
-                        binding.textViewError.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
+                        binding.textViewError.visibility = View.GONE
+                        binding.textViewNullData.visibility = View.GONE
+                    } else {
+                        binding.textViewNullData.visibility = View.VISIBLE
                         binding.recyclerView.visibility = View.GONE
+                        binding.textViewError.visibility = View.GONE
                         binding.progressBar.visibility = View.GONE
                     }
-                    is Resource.Loading -> {
-                        binding.textViewError.visibility = View.GONE
-                        binding.recyclerView.visibility = View.GONE
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
+                }
+                is Resource.Error -> {
+                    binding.textViewError.text = it.message.toString()
+
+                    binding.textViewError.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    binding.textViewNullData.visibility = View.GONE
+                }
+                is Resource.Loading -> {
+                    binding.textViewError.visibility = View.GONE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.textViewNullData.visibility = View.GONE
                 }
             }
         }
     }
+
 
     private fun initViews() {
 
@@ -100,11 +101,11 @@ class HomeFragment : BaseFragment() {
         }
 
 
-        budgetListAdapter.onDeleteClick = { type,amount,isIncome,date,documentId->
+        budgetListAdapter.onDeleteClick = { type, amount, isIncome, date, documentId ->
 
             val action = HomeFragmentDirections.actionNavigationHomeToAddCashFlowFragment(
                 isHomePage = false,
-                type =type ,
+                type = type,
                 amount = amount,
                 isIncome = isIncome,
                 date = date,
