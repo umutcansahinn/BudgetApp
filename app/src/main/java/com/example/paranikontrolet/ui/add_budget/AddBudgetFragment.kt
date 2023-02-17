@@ -62,6 +62,18 @@ class AddBudgetFragment : BaseFragment() {
     }
 
     private fun observeEvents() {
+
+        viewModel.addBudget.observe(viewLifecycleOwner) {
+            when (it) {
+                is BudgetState.OnSuccess -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                }
+                is BudgetState.OnFailure -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
         viewModel.deleteBudget.observe(viewLifecycleOwner) {
             when (it) {
                 is BudgetState.OnSuccess -> {
@@ -105,22 +117,18 @@ class AddBudgetFragment : BaseFragment() {
         calendarItem()
 
         binding.buttonSave.setOnClickListener {
-
             amount = binding.editTextAmount.text.toString().toFloatOrNull()
             isIncome = binding.switchIncome.isChecked
-
             viewModel.addBudget(
                 amount = amount,
                 isIncome = isIncome,
                 type = type,
                 date = selectedDate
             )
-            findNavController().popBackStack()
         }
     }
 
     private fun deleteOrUpdateBudget() {
-
         when (argsType) {
             Type.INCOME.type -> binding.chipIncome.isChecked = true
             Type.RENT.type -> binding.chipRent.isChecked = true

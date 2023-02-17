@@ -30,20 +30,24 @@ class FirebaseFirestoreDatabaseImpl @Inject constructor(
             .set(user).await()
     }
 
-    override suspend fun saveBudget(hashMap: HashMap<String,Any>) {
-        firestore.collection(Constants.COLLECTION_PATH_BUDGET)
-            .add(hashMap).await()
+    override suspend fun saveBudget(hashMap: HashMap<String, Any>): Task<DocumentReference>{
+        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).add(hashMap)
     }
+
     override suspend fun getBudgetDocuments(userId: String): QuerySnapshot {
-            return firestore.collection(Constants.COLLECTION_PATH_BUDGET)
-                .whereEqualTo(Constants.USER_ID,userId).get().await()
+        return firestore.collection(Constants.COLLECTION_PATH_BUDGET)
+            .whereEqualTo(Constants.USER_ID, userId).get().await()
     }
 
     override suspend fun deleteBudget(documentId: String): Task<Void> {
-       return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId).delete()
+        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId).delete()
     }
 
-    override suspend fun updateBudget(hashMap: HashMap<String, Any>,documentId: String): Task<Void> {
-        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId).update(hashMap)
+    override suspend fun updateBudget(
+        hashMap: HashMap<String, Any>,
+        documentId: String
+    ): Task<Void> {
+        return firestore.collection(Constants.COLLECTION_PATH_BUDGET).document(documentId)
+            .update(hashMap)
     }
 }
