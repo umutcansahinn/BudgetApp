@@ -11,6 +11,7 @@ import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentAddBudgetBinding
 import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.Constants
+import com.example.paranikontrolet.utils.enums.Type
 import com.example.paranikontrolet.utils.toFormat
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -232,19 +233,4 @@ class AddBudgetFragment : BaseFragment() {
         _binding = null
     }
 
-}
-
-enum class Type(val type: String) {
-    INCOME("income"),
-    RENT("rent"),
-    CAR("car"),
-    ELECTRIC("electric"),
-    WATER("water"),
-    GAS("gas"),
-    INTERNET("internet"),
-    PHONE("phone"),
-    MARKET("market"),
-    CLOTHES("clothes"),
-    EDUCATION("education"),
-    OTHERS("others")
 }

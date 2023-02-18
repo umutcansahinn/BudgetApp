@@ -40,17 +40,17 @@ class SignInFragment : BaseFragment() {
     private fun observeEvent() {
         viewModel.authResult.observe(viewLifecycleOwner) {
            when(it) {
-               is SignInUiState.SignInIsFailure-> {
+               is SignInState.SignInIsFailure-> {
                     Toast.makeText(context,it.value,Toast.LENGTH_SHORT).show()
                }
-               is SignInUiState.VerificationIsFailure-> {
+               is SignInState.VerificationIsFailure-> {
                    Toast.makeText(context,it.value,Toast.LENGTH_SHORT).show()
                }
-               is SignInUiState.VerificationIsSuccess-> {
+               is SignInState.VerificationIsSuccess-> {
                    Toast.makeText(context,"giris basarılı",Toast.LENGTH_SHORT).show()
                    findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
                }
-               is SignInUiState.Loading-> {
+               is SignInState.Loading-> {
 
                }
            }

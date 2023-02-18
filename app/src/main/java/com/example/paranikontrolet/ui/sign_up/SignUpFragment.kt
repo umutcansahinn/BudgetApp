@@ -64,15 +64,15 @@ class SignUpFragment : BaseFragment() {
         viewModel.authResult.observe(viewLifecycleOwner) {
 
             when(it) {
-                is SignUpUiState.SendEmailIsSuccess -> {
+                is SignUpState.SendEmailIsSuccess -> {
                     requireView().showSnackbarWithButton(it.value) {
                         findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
                     }
                 }
-                is SignUpUiState.SendEmailIsFailure-> {
+                is SignUpState.SendEmailIsFailure-> {
                     requireView().showSnackbar(it.value)
                 }
-                is SignUpUiState.SignUpIsSuccess-> {
+                is SignUpState.SignUpIsSuccess-> {
                     binding.progressBar.gone()
                     viewModel.saveUser(
                         getFirebaseUserUid = it.result.user?.uid!!,
@@ -81,11 +81,11 @@ class SignUpFragment : BaseFragment() {
                         password = binding.editTextPassword.text.toString()
                     )
                 }
-                is SignUpUiState.SignUpIsFailure -> {
+                is SignUpState.SignUpIsFailure -> {
                     binding.progressBar.gone()
                     requireView().showSnackbar(it.value)
                 }
-                is SignUpUiState.Loading-> {
+                is SignUpState.Loading-> {
                     if(it.visibility) {
                         binding.progressBar.visibility = View.VISIBLE
                     }else {

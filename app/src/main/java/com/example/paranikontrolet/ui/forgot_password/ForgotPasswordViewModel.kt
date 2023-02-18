@@ -30,8 +30,3 @@ class ForgotPasswordViewModel @Inject constructor(
         }
     }
 }
-
-sealed class ForgotPasswordState {
-    data class PasswordSuccess(val message: String) : ForgotPasswordState()
-    data class PasswordFailure(val message: String) : ForgotPasswordState()
-}

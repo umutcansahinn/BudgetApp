@@ -11,6 +11,7 @@ import com.example.paranikontrolet.databinding.FragmentChartBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.Resource
+import com.example.paranikontrolet.utils.enums.Type
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
@@ -189,19 +190,4 @@ class ChartFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
-}
-
-enum class Type(val type: String) {
-    INCOME("income"),
-    RENT("rent"),
-    CAR("car"),
-    ELECTRIC("electric"),
-    WATER("water"),
-    GAS("gas"),
-    INTERNET("internet"),
-    PHONE("phone"),
-    MARKET("market"),
-    CLOTHES("clothes"),
-    EDUCATION("education"),
-    OTHERS("others")
 }

@@ -16,8 +16,8 @@ class SignUpViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _authResult = MutableLiveData<SignUpUiState>()
-    val authResult: LiveData<SignUpUiState> = _authResult
+    private val _authResult = MutableLiveData<SignUpState>()
+    val authResult: LiveData<SignUpState> = _authResult
 
 
    fun signInWithEmailAndPassword(
@@ -35,23 +35,23 @@ class SignUpViewModel @Inject constructor(
        ) {
 
            viewModelScope.launch {
-               _authResult.value = SignUpUiState.Loading(true)
+               _authResult.value = SignUpState.Loading(true)
                useCases.signUp(email,password).addOnCompleteListener { task ->
                    if (task.isSuccessful) {
                        viewModelScope.launch {
                         useCases.getCurrentUserInfo()?.sendEmailVerification()
                             ?.addOnSuccessListener {
-                                _authResult.value = SignUpUiState
+                                _authResult.value = SignUpState
                                     .SendEmailIsSuccess("Please check your e-mail")
                             }?.addOnFailureListener {
-                                _authResult.value = SignUpUiState.SendEmailIsFailure("Please try again later")
+                                _authResult.value = SignUpState.SendEmailIsFailure("Please try again later")
                             }
                        }
-                       _authResult.value = SignUpUiState.Loading(false)
-                       _authResult.value = SignUpUiState.SignUpIsSuccess(task.result)
+                       _authResult.value = SignUpState.Loading(false)
+                       _authResult.value = SignUpState.SignUpIsSuccess(task.result)
                    }
                }.addOnFailureListener {
-                   _authResult.value = SignUpUiState.SignUpIsFailure(it.message.toString())
+                   _authResult.value = SignUpState.SignUpIsFailure(it.message.toString())
                }
            }
        }
@@ -73,12 +73,4 @@ class SignUpViewModel @Inject constructor(
         }
 
     }
-}
-
-sealed class SignUpUiState {
-    data class SendEmailIsSuccess(val value: String): SignUpUiState()
-    data class SendEmailIsFailure(val value: String): SignUpUiState()
-    data class SignUpIsSuccess(val result: AuthResult): SignUpUiState()
-    data class SignUpIsFailure(val value: String): SignUpUiState()
-    data class Loading(val visibility: Boolean): SignUpUiState()
 }

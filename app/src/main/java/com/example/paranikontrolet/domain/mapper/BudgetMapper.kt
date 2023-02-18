@@ -4,6 +4,8 @@ import android.graphics.Color
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
+import com.example.paranikontrolet.utils.enums.Type
+import com.example.paranikontrolet.utils.enums.UiColor
 
 class BudgetMapper {
 
@@ -62,24 +64,4 @@ class BudgetMapper {
         true -> UiColor.Green.color
         else -> UiColor.Red.color
     }
-}
-
-enum class Type(val type: String) {
-    INCOME("income"),
-    RENT("rent"),
-    CAR("car"),
-    ELECTRIC("electric"),
-    WATER("water"),
-    GAS("gas"),
-    INTERNET("internet"),
-    PHONE("phone"),
-    MARKET("market"),
-    CLOTHES("clothes"),
-    EDUCATION("education"),
-    OTHERS("others")
-}
-
-enum class UiColor(val color: String) {
-    Green("#63FF00"),
-    Red("#FF0000"),
 }

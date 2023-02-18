@@ -15,8 +15,8 @@ class SignInViewModel @Inject constructor(
     private val useCases: UseCases
 ) : ViewModel() {
 
-    private val _authResult = MutableLiveData<SignInUiState>()
-    val authResult: LiveData<SignInUiState> = _authResult
+    private val _authResult = MutableLiveData<SignInState>()
+    val authResult: LiveData<SignInState> = _authResult
 
 
     fun signInWithEmailAndPassword(email: String?, password: String?) {
@@ -25,33 +25,27 @@ class SignInViewModel @Inject constructor(
             !password.isNullOrBlank()
         ) {
             viewModelScope.launch {
-                _authResult.value = SignInUiState.Loading(true)
+                _authResult.value = SignInState.Loading(true)
                 useCases.signIn(email,password).addOnCompleteListener { task->
                     if (task.isSuccessful) {
                         viewModelScope.launch{
                            val verification =  useCases.getCurrentUserInfo()?.isEmailVerified
                             verification?.let {
                                 if (it) {
-                                    _authResult.value = SignInUiState.Loading(false)
-                                    _authResult.value = SignInUiState.VerificationIsSuccess(task.result)
+                                    _authResult.value = SignInState.Loading(false)
+                                    _authResult.value = SignInState.VerificationIsSuccess(task.result)
                                 }else {
-                                    _authResult.value = SignInUiState.VerificationIsFailure("Please check your e-mail")
+                                    _authResult.value = SignInState.VerificationIsFailure("Please check your e-mail")
                                 }
                             }
                         }
                     }
                 }.addOnFailureListener {
-                    _authResult.value = SignInUiState.SignInIsFailure(it.message.toString())
+                    _authResult.value = SignInState.SignInIsFailure(it.message.toString())
                 }
             }
 
         }
     }
 
-}
-sealed class SignInUiState {
-    data class VerificationIsSuccess(val result: AuthResult): SignInUiState()
-    data class VerificationIsFailure(val value: String): SignInUiState()
-    data class SignInIsFailure(val value: String): SignInUiState()
-    data class Loading(val visibility: Boolean): SignInUiState()
 }
