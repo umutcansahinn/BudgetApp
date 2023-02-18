@@ -14,7 +14,6 @@
 -> FIREBASE-AUTH <br/>
 -> FIREBASE-FIRESTORE <br/>
 
-not finished yet <br/>
 
 ![a1](https://user-images.githubusercontent.com/66000826/217500132-ac7f88e6-42dc-4fa9-9039-47eff39aa0e5.PNG)
 
