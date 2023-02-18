@@ -46,6 +46,8 @@ class AddBudgetViewModel @Inject constructor(
                 }.addOnFailureListener {
                     _addBudget.value = BudgetState.OnFailure(it.message.toString())
                 }
+            }else {
+                _addBudget.value = BudgetState.OnFailure("Please check your data")
             }
 
         }
