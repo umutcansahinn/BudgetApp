@@ -1,5 +1,6 @@
 package com.example.paranikontrolet.ui.calendar.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,10 +32,11 @@ class CalendarListAdapter : RecyclerView.Adapter<CalendarListAdapter.ViewHolder>
         holder.binding.textViewAmount.text = calendarList[position].amount.toString()
         holder.binding.textViewType.text = calendarList[position].type
         holder.binding.imageViewIcon.setImageResource(calendarList[position].icon)
-        holder.binding.cardView.setCardBackgroundColor(Color.parseColor(calendarList[position].cardColor))
+        holder.binding.lineColor.setBackgroundColor(Color.parseColor(calendarList[position].cardColor))
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newToDoList: List<BudgetUiModel>) {
         calendarList.clear()
         calendarList.addAll(newToDoList)

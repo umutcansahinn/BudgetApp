@@ -1,6 +1,7 @@
 package com.example.paranikontrolet.ui.home.adapter
 
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         holder.binding.textViewDate.text =
             budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
         holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
-        holder.binding.cardView.setCardBackgroundColor(Color.parseColor(budgetList[position].cardColor))
+        holder.binding.lineColor.setBackgroundColor(Color.parseColor(budgetList[position].cardColor))
 
         holder.binding.imageButton.setOnClickListener {
             onDeleteClick?.invoke(
@@ -52,6 +53,7 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newToDoList: List<BudgetUiModel>) {
         budgetList.clear()
         budgetList.addAll(newToDoList)
