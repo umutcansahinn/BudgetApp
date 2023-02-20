@@ -32,8 +32,7 @@ class CalendarFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,10 +44,10 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun observeEvent() {
-        viewModel.result.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.result.observe(viewLifecycleOwner) { list ->
+            when (list) {
                 is Resource.Success -> {
-                    it.data?.let {
+                    list.data?.let {
                         showCalendar(it)
                         showRecyclerView(it)
                     }

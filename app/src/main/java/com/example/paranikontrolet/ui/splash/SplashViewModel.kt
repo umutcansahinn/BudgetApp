@@ -20,9 +20,9 @@ class SplashViewModel @Inject constructor(
     val isCurrentUserExist: LiveData<FirebaseUser?> = _isCurrentUserExist
 
     init {
-        getCurrent()
+        getCurrentUserInfo()
     }
-    fun getCurrent() {
+    fun getCurrentUserInfo() {
         viewModelScope.launch(Dispatchers.Main) {
             delay(2000)
             _isCurrentUserExist.value = useCases.getCurrentUserInfo()

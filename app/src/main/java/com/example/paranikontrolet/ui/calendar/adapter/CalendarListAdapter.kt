@@ -10,7 +10,7 @@ import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 
 class CalendarListAdapter : RecyclerView.Adapter<CalendarListAdapter.ViewHolder>() {
 
-    val calendarList = ArrayList<BudgetUiModel>()
+   private val calendarList = ArrayList<BudgetUiModel>()
 
     class ViewHolder(val binding: ItemCalendarRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root)

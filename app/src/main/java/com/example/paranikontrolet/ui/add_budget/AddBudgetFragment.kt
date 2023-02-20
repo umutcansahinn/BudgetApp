@@ -9,10 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.paranikontrolet.R
 import com.example.paranikontrolet.databinding.FragmentAddBudgetBinding
-import com.example.paranikontrolet.utils.BaseFragment
-import com.example.paranikontrolet.utils.Constants
+import com.example.paranikontrolet.utils.*
 import com.example.paranikontrolet.utils.enums.Type
-import com.example.paranikontrolet.utils.toFormat
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -43,8 +41,7 @@ class AddBudgetFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBudgetBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -149,9 +146,9 @@ class AddBudgetFragment : BaseFragment() {
         binding.switchIncome.isChecked = argsIsIncome.toBoolean()
         binding.switchExpense.isChecked = !argsIsIncome.toBoolean()
         binding.buttonCalender.text = argsDate
-        binding.buttonSave.visibility = View.GONE
-        binding.buttonDelete.visibility = View.VISIBLE
-        binding.buttonUpdate.visibility = View.VISIBLE
+        binding.buttonSave.gone()
+        binding.buttonDelete.visible()
+        binding.buttonUpdate.visible()
 
         binding.buttonDelete.setOnClickListener {
             viewModel.deleteBudget(documentId = argsDocumentId!!)
@@ -174,7 +171,7 @@ class AddBudgetFragment : BaseFragment() {
     }
 
     private fun chipItems() {
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipIncome -> type = binding.chipIncome.text.toString()
                 R.id.chipRent -> type = binding.chipRent.text.toString()

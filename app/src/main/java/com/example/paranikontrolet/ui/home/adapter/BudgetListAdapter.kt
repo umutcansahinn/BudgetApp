@@ -6,16 +6,14 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.Constants
 import com.example.paranikontrolet.utils.toFormat
-import java.util.Date
 
 class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
 
-    val budgetList = ArrayList<BudgetUiModel>()
+    private val budgetList = ArrayList<BudgetUiModel>()
     var onDeleteClick: ((type:String,amount: String,isIncome:String,date: String,documentId: String) -> Unit)? = null
 
     class ViewHolder(val binding: ItemHomeRecyclerviewBinding) :

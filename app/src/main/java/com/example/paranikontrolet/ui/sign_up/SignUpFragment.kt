@@ -26,8 +26,7 @@ class SignUpFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,9 +86,9 @@ class SignUpFragment : BaseFragment() {
                 }
                 is SignUpState.Loading-> {
                     if(it.visibility) {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.visible()
                     }else {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.gone()
                     }
                 }
             }

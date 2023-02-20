@@ -1,6 +1,5 @@
 package com.example.paranikontrolet.ui.add_budget
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -89,10 +88,8 @@ class AddBudgetViewModel @Inject constructor(
                     documentId = documentId
                 ).addOnSuccessListener {
                     _updateBudget.value = BudgetState.OnSuccess("Data Updated")
-                    Log.d("umut", "data updated")
                 }.addOnFailureListener {
                     _updateBudget.value = BudgetState.OnFailure(it.message.toString())
-                    Log.d("umut", it.message.toString())
                 }
             } else {
                 _updateBudget.value = BudgetState.OnFailure("Please check your data!!")

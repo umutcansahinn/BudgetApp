@@ -26,8 +26,7 @@ class SignInFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +46,7 @@ class SignInFragment : BaseFragment() {
                    Toast.makeText(context,it.value,Toast.LENGTH_SHORT).show()
                }
                is SignInState.VerificationIsSuccess-> {
-                   Toast.makeText(context,"giris basarılı",Toast.LENGTH_SHORT).show()
+                   Toast.makeText(context,"Login successful",Toast.LENGTH_SHORT).show()
                    findNavController().navigate(R.id.action_signInFragment_to_navigation_home)
                }
                is SignInState.Loading-> {

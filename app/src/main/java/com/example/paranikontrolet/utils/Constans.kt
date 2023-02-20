@@ -12,7 +12,6 @@ object Constants {
 
     const val AMOUNT = "amount"
     const val IS_INCOME = "isIncome"
-    const val IS_REGULAR = "isRegular"
     const val TYPE = "type"
     const val DATE = "date"
     const val USER_ID = "userId"

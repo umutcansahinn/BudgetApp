@@ -11,6 +11,8 @@ import com.example.paranikontrolet.databinding.FragmentHomeBinding
 import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.ui.home.adapter.BudgetListAdapter
 import com.example.paranikontrolet.utils.Resource
+import com.example.paranikontrolet.utils.gone
+import com.example.paranikontrolet.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,8 +31,7 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,37 +44,37 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun observeEvent() {
-        viewModel.result.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.result.observe(viewLifecycleOwner) { list ->
+            when (list) {
                 is Resource.Success -> {
-                    if (it.data != null && it.data.isEmpty().not()) {
-                        val newList = it.data.sortedWith(compareByDescending { it.date })
+                    if (list.data != null && list.data.isEmpty().not()) {
+                        val newList = list.data.sortedWith(compareByDescending { it.date })
                         budgetListAdapter.updateList(newList)
 
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
-                        binding.textViewError.visibility = View.GONE
-                        binding.textViewNullData.visibility = View.GONE
+                        binding.recyclerView.visible()
+                        binding.progressBar.gone()
+                        binding.textViewError.gone()
+                        binding.textViewNullData.gone()
                     } else {
-                        binding.textViewNullData.visibility = View.VISIBLE
-                        binding.recyclerView.visibility = View.GONE
-                        binding.textViewError.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
+                        binding.textViewNullData.visible()
+                        binding.recyclerView.gone()
+                        binding.textViewError.gone()
+                        binding.progressBar.gone()
                     }
                 }
                 is Resource.Error -> {
-                    binding.textViewError.text = it.message.toString()
+                    binding.textViewError.text = list.message.toString()
 
-                    binding.textViewError.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
-                    binding.textViewNullData.visibility = View.GONE
+                    binding.textViewError.visible()
+                    binding.recyclerView.gone()
+                    binding.progressBar.gone()
+                    binding.textViewNullData.gone()
                 }
                 is Resource.Loading -> {
-                    binding.textViewError.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.textViewNullData.visibility = View.GONE
+                    binding.textViewError.gone()
+                    binding.recyclerView.gone()
+                    binding.progressBar.visible()
+                    binding.textViewNullData.gone()
                 }
             }
         }

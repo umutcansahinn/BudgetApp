@@ -12,6 +12,8 @@ import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
 import com.example.paranikontrolet.utils.BaseFragment
 import com.example.paranikontrolet.utils.Resource
 import com.example.paranikontrolet.utils.enums.Type
+import com.example.paranikontrolet.utils.gone
+import com.example.paranikontrolet.utils.visible
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
@@ -46,8 +48,7 @@ class ChartFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChartBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,13 +61,13 @@ class ChartFragment : BaseFragment() {
 
     private fun initViews() {
 
-        binding.switchType.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchType.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                binding.barChart.visibility = View.VISIBLE
-                binding.pieChart.visibility = View.GONE
+                binding.barChart.visible()
+                binding.pieChart.gone()
             } else {
-                binding.barChart.visibility = View.GONE
-                binding.pieChart.visibility = View.VISIBLE
+                binding.barChart.gone()
+                binding.pieChart.visible()
             }
         }
 
@@ -82,25 +83,25 @@ class ChartFragment : BaseFragment() {
                     if (it.data != null && it.data.isEmpty().not()) {
                             setBarChart(it.data)
                             setPieChart(it.data)
-                        binding.textViewError.visibility = View.GONE
-                        binding.progressBar.visibility = View.GONE
-                        binding.textViewNullData.visibility = View.GONE
+                        binding.textViewError.gone()
+                        binding.progressBar.gone()
+                        binding.textViewNullData.gone()
                     } else {
-                        binding.showLinearLayout.visibility = View.GONE
-                        binding.textViewNullData.visibility = View.VISIBLE
+                        binding.showLinearLayout.gone()
+                        binding.textViewNullData.visible()
                     }
                 }
                 is Resource.Error -> {
-                    binding.textViewError.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    binding.barChart.visibility = View.GONE
-                    binding.pieChart.visibility = View.GONE
+                    binding.textViewError.visible()
+                    binding.progressBar.gone()
+                    binding.barChart.gone()
+                    binding.pieChart.gone()
                 }
                 is Resource.Loading -> {
-                    binding.textViewError.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.barChart.visibility = View.GONE
-                    binding.pieChart.visibility = View.GONE
+                    binding.textViewError.gone()
+                    binding.progressBar.visible()
+                    binding.barChart.gone()
+                    binding.pieChart.gone()
                 }
             }
         }
