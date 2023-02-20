@@ -1,14 +1,14 @@
-package com.example.paranikontrolet.domain.usecase.firebase_auth_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.get_current_user_info
 
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
-class GetCurrentUserInfo @Inject constructor(
+class GetCurrentUserInfoImpl @Inject constructor(
     private val auth: FirebaseAuthenticator
-) {
+): GetCurrentUserInfo {
 
-    suspend operator fun invoke(): FirebaseUser? {
+    override suspend operator fun invoke(): FirebaseUser? {
         return auth.getCurrentUserInfo()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.update_budget
 
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.example.paranikontrolet.utils.Constants
@@ -6,11 +6,11 @@ import com.google.android.gms.tasks.Task
 import java.util.*
 import javax.inject.Inject
 
-class UpdateBudget @Inject constructor(
+class UpdateBudgetImpl @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
-) {
+) : UpdateBudget{
 
-    suspend operator fun invoke(
+    override suspend operator fun invoke(
         amount: Float,
         isIncome: Boolean,
         type: String,

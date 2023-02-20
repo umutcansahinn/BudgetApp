@@ -1,4 +1,4 @@
-package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.get_budget_from_firestore
 
 import com.example.paranikontrolet.data.model.Budget
 import com.example.paranikontrolet.domain.mapper.BudgetMapper
@@ -11,13 +11,13 @@ import java.util.Date
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class GetBudgetFromFirestore @Inject constructor(
+class GetBudgetFromFirestoreImpl @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase,
     private val auth: FirebaseAuthenticator,
     private val mapper: BudgetMapper
-) {
+): GetBudgetFromFirestore {
 
-    suspend operator fun invoke(): Resource<List<BudgetUiModel>> {
+    override suspend operator fun invoke(): Resource<List<BudgetUiModel>> {
         val userId = auth.getCurrentUserInfo()!!.uid
 
         return try {

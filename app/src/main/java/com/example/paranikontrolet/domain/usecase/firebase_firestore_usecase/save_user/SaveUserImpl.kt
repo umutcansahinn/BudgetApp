@@ -1,13 +1,13 @@
-package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.save_user
 
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import javax.inject.Inject
 
-class SaveUser @Inject constructor(
+class SaveUserImpl @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
-) {
+) : SaveUser {
 
-    suspend operator fun invoke(
+    override suspend operator fun invoke(
         getFirebaseUserUid: String,
         email: String,
         name: String,

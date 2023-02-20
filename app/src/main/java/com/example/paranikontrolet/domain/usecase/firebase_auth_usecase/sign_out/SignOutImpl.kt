@@ -1,13 +1,13 @@
-package com.example.paranikontrolet.domain.usecase.firebase_auth_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_auth_usecase.sign_out
 
 import com.example.paranikontrolet.domain.repository.FirebaseAuthenticator
 import javax.inject.Inject
 
-class SignOut @Inject constructor(
+class SignOutImpl @Inject constructor(
     private val auth: FirebaseAuthenticator
-) {
+): SignOut {
 
-    suspend operator fun invoke() {
+    override suspend operator fun invoke() {
         auth.signOut()
     }
 }

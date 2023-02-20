@@ -1,14 +1,14 @@
-package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase
+package com.example.paranikontrolet.domain.usecase.firebase_firestore_usecase.delete_budget
 
 import com.example.paranikontrolet.domain.repository.FirebaseFirestoreDatabase
 import com.google.android.gms.tasks.Task
 import javax.inject.Inject
 
-class DeleteBudget @Inject constructor(
+class DeleteBudgetImpl @Inject constructor(
     private val firestore: FirebaseFirestoreDatabase
-) {
+) : DeleteBudget {
 
-    suspend operator fun invoke(documentId: String): Task<Void> {
+    override suspend operator fun invoke(documentId: String): Task<Void> {
         return firestore.deleteBudget(documentId = documentId)
     }
 }
