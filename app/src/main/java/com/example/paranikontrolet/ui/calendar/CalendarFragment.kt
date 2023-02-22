@@ -34,6 +34,7 @@ class CalendarFragment : BaseFragment() {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -95,14 +96,15 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun showRecyclerView(list: List<BudgetUiModel>) {
-        binding.calendarView.setOnDayClickListener { eventDay->
-            list.filter { budget->
+        binding.calendarView.setOnDayClickListener { eventDay ->
+            list.filter { budget ->
                 budget.date.time == eventDay.calendar.time.time
             }.run {
-                calendarListAdapter.updateList(this)
+                calendarListAdapter.calendarList = this
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

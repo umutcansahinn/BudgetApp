@@ -1,10 +1,11 @@
 package com.example.paranikontrolet.ui.home.adapter
 
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paranikontrolet.databinding.ItemHomeRecyclerviewBinding
 import com.example.paranikontrolet.domain.ui_model.BudgetUiModel
@@ -12,12 +13,23 @@ import com.example.paranikontrolet.utils.Constants
 import com.example.paranikontrolet.utils.toFormat
 
 class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
-
-    private val budgetList = ArrayList<BudgetUiModel>()
-    var onDeleteClick: ((type:String,amount: String,isIncome:String,date: String,documentId: String) -> Unit)? = null
-
     class ViewHolder(val binding: ItemHomeRecyclerviewBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    private val differCallback = object : DiffUtil.ItemCallback<BudgetUiModel>() {
+        override fun areItemsTheSame(oldItem: BudgetUiModel, newItem: BudgetUiModel): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: BudgetUiModel, newItem: BudgetUiModel): Boolean {
+            return oldItem == newItem
+        }
+    }
+    private val differ = AsyncListDiffer(this, differCallback)
+
+    var budgetList: List<BudgetUiModel>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHomeRecyclerviewBinding.inflate(
@@ -33,28 +45,32 @@ class BudgetListAdapter : RecyclerView.Adapter<BudgetListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.textViewAmount.text = budgetList[position].amount.toString()
-        holder.binding.textViewType.text = budgetList[position].type
-        holder.binding.textViewDate.text =
-            budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
-        holder.binding.imageViewIcon.setImageResource(budgetList[position].icon)
-        holder.binding.lineColor.setBackgroundColor(Color.parseColor(budgetList[position].cardColor))
 
-        holder.binding.imageButton.setOnClickListener {
-            onDeleteClick?.invoke(
-                budgetList[position].type,
-                budgetList[position].amount.toString(),
-                budgetList[position].isIncome.toString(),
-                budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT),
-                budgetList[position].id!!
-            )
+        holder.binding.apply {
+            textViewAmount.text = budgetList[position].amount.toString()
+            textViewType.text = budgetList[position].type
+            textViewDate.text = budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT)
+            imageViewIcon.setImageResource(budgetList[position].icon)
+            lineColor.setBackgroundColor(Color.parseColor(budgetList[position].cardColor))
+
+            imageButton.setOnClickListener {
+                onDeleteClick?.invoke(
+                    budgetList[position].type,
+                    budgetList[position].amount.toString(),
+                    budgetList[position].isIncome.toString(),
+                    budgetList[position].date.toFormat(Constants.CURRENT_DATE_FORMAT),
+                    budgetList[position].id!!
+                )
+            }
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newToDoList: List<BudgetUiModel>) {
-        budgetList.clear()
-        budgetList.addAll(newToDoList)
-        notifyDataSetChanged()
-    }
+    var onDeleteClick: ((
+        type: String,
+        amount: String,
+        isIncome: String,
+        date: String,
+        documentId: String
+    ) -> Unit)? = null
+
 }

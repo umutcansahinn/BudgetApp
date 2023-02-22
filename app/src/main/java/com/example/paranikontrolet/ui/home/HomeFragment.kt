@@ -49,7 +49,7 @@ class HomeFragment : BaseFragment() {
                 is Resource.Success -> {
                     if (list.data != null && list.data.isEmpty().not()) {
                         val newList = list.data.sortedWith(compareByDescending { it.date })
-                        budgetListAdapter.updateList(newList)
+                        budgetListAdapter.budgetList = newList
 
                         binding.recyclerView.visible()
                         binding.progressBar.gone()
